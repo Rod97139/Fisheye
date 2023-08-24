@@ -1,4 +1,4 @@
-const photographerTemplate = (data) => {
+export const photographerTemplate = (data) => {
     const { name, portrait } = data;
 
     const picture = `assets/photographers/${portrait}`;
