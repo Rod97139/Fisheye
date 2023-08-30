@@ -1,7 +1,5 @@
 import { photographerTemplate } from "../templates/photographer.js";
 
-
-
     const saveToLocalStorage = async (data) => {
         window.localStorage.setItem("photographers", JSON.stringify(data.photographers));
         const photosByPhotographer = {} 
