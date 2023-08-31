@@ -1,59 +1,43 @@
+import DataApi from "../api/DataApi.js";
 import { photographerTemplate } from "../templates/photographer.js";
+import Photographer from "../models/Photographer.js";
+import { saveToLocalStorage } from "../api/localStorage.js";
 
 
-
-    const saveToLocalStorage = async (data) => {
-        window.localStorage.setItem("photographers", JSON.stringify(data.photographers));
-        const photosByPhotographer = {} 
-        let lastId = null;
-        data.media.forEach((media) => {
-            if (!photosByPhotographer[media.photographerId]) {
-                if (lastId) {
-                    window.localStorage.setItem(`media-${lastId}`, JSON.stringify(photosByPhotographer[lastId])); 
-                }
-                photosByPhotographer[media.photographerId] = [];
-            }
-            photosByPhotographer[media.photographerId].push(media);
-            lastId = media.photographerId;
-            
-        });
-        window.localStorage.setItem(`media-${lastId}`, JSON.stringify(photosByPhotographer[lastId])); 
+class App {
+    constructor() {
+        this.$photographersWrapper = document.querySelector('.photographer_section')
+        this.dataApi = new DataApi('data/photographers.json')
+        this.photographers = []
     }
 
 
-    const getPhotographers = async () => {
-        // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet, 
-        // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
-        
-        let photographers = window.localStorage.getItem("photographers");
-
-        if (!photographers) {
-            const data = await fetch("data/photographers.json").then(data => data.json());
-            saveToLocalStorage(data);
-            photographers = data.photographers;
-        } else {
-            photographers = JSON.parse(photographers);
+    async getPhotographers() {
+        let localPhotographers = window.localStorage.getItem("photographers");
+        if (!localPhotographers) {
+            const data = await this.dataApi.get()
+            saveToLocalStorage(data)
+            localPhotographers = data.photographers;
+        }else {
+            localPhotographers = JSON.parse(localPhotographers);
         }
-        // et bien retourner le tableau photographers seulement une fois récupéré
-        return ({
-            photographers: [...photographers]})
+        this.photographers = localPhotographers.map(photographer => new Photographer(photographer))
     }
 
-    const displayData = (photographers) => {
-        const photographersSection = document.querySelector(".photographer_section");
-
-        photographers.forEach((photographer) => {
+    displayData (photographers) {
+        photographers.forEach(photographer => {
             const photographerModel = photographerTemplate(photographer);
             const userCardDOM = photographerModel.getUserCardDOM();
-            photographersSection.appendChild(userCardDOM);
-        });
+            this.$photographersWrapper.appendChild(userCardDOM);
+        })
     }
 
-    const init = async () => {
-        // Récupère les datas des photographes
-        const { photographers } = await getPhotographers();
-        displayData(photographers);
+    async main() {
+        await this.getPhotographers()
+        this.displayData(this.photographers)
     }
-    
-    init();
-    
+}
+
+const app = new App()
+app.main()
+

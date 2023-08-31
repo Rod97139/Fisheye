@@ -7,5 +7,6 @@ class Media {
         // si null
         return this.image ?? this.video;
     }
-    
 }
+
+export default Media
