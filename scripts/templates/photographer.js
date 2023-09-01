@@ -7,9 +7,12 @@ export const photographerTemplate = (data) => {
         const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
+        const link = document.createElement( 'a' );
+        link.setAttribute("href", `photographer.html?id=${data.id}`);
+        link.appendChild(img);
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
-        article.appendChild(img);
+        article.appendChild(link);
         article.appendChild(h2);
         return (article);
     }
