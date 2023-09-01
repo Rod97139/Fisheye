@@ -3,6 +3,7 @@
 import DataApi from "../api/DataApi.js";
 import { saveToLocalStorage } from "../api/localStorage.js";
 import Media from "../models/Media.js";
+import Photographer from "../models/Photographer.js";
 import { expoTemplate } from "../templates/Expo.js";
 
 
@@ -27,7 +28,7 @@ class App {
         }else {
             localPhotographers = JSON.parse(localPhotographers);
         }
-        this.photographer = localPhotographers.filter((photographer) => photographer.id == this.photographerId)[0];
+        this.photographer = new Photographer(localPhotographers.filter((photographer) => photographer.id == this.photographerId)[0]);
     }
     
     async getMedias() {
@@ -52,7 +53,7 @@ class App {
         await this.getMedias()
     //    this.displayPhotographer(this.photographer)
        this.displayExpo(this.medias, this.photographer)
-       console.log(this.medias[6].file)
+
     }
 }
 

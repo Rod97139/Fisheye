@@ -35,6 +35,21 @@ class App {
     async main() {
         await this.getPhotographers()
         this.displayData(this.photographers)
+
+
+        // fetch("photographer.html?id=195", {
+        //     method: "get"
+        //     })
+        //     .then(res => res.text())
+        //     .then(html => {
+        //         let content = document.createElement("html")
+        //         content.innerHTML = html
+        //         let oldContent = document.querySelector("html") 
+                
+    
+        //         oldContent.innerHTML = html
+        //         console.log(oldContent);
+        //     })    
     }
 }
 
