@@ -1,33 +1,20 @@
-// import { expoTemplate } from "../templates/Expo";
-
-import DataApi from "../api/DataApi.js";
-import { saveToLocalStorage } from "../api/localStorage.js";
 import Media from "../models/Media.js";
 import Photographer from "../models/Photographer.js";
 import { expoTemplate } from "../templates/Expo.js";
 
 
 
-class App {
-    constructor() {
-        const urlParams = new URLSearchParams(window.location.search);
-        this.photographerId = urlParams.get('id');
+class PhotographerPage {
+
+    constructor(id, photographers) {
+        this.photographerId = id;
+        this.photographers = photographers
         this.$expoWrapper = document.querySelector('.expo_section')
-        this.dataApi = new DataApi('data/photographers.json')
         this.medias = []
     }
 
-
-    
     async getPhotographer() {
-        let localPhotographers = window.localStorage.getItem("photographers");
-        if (!localPhotographers) {
-            const data = await this.dataApi.get()
-            saveToLocalStorage(data)
-            localPhotographers = data.photographers;
-        }else {
-            localPhotographers = JSON.parse(localPhotographers);
-        }
+        let localPhotographers = this.photographers
         this.photographer = new Photographer(localPhotographers.filter((photographer) => photographer.id == this.photographerId)[0]);
     }
     
@@ -57,9 +44,5 @@ class App {
     }
 }
 
-const app = new App()
-app.main()
-
-
-
+export default PhotographerPage;
 
