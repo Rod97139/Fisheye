@@ -9,9 +9,9 @@ export const fetchSpaListener = async (link, App) => {
         })
         .then(res => res.text())
         .then(html => {
-            let newContent = document.createElement("html")
+            const newContent = document.createElement("html")
             newContent.innerHTML = html
-            let oldContent = document.querySelector("html") 
+            const oldContent = document.querySelector("html") 
             oldContent.querySelector("main").replaceWith(newContent.querySelector("main"))  
             oldContent.querySelector("title").replaceWith(newContent.querySelector("title"))  
             App.checkUrl()

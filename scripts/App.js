@@ -64,9 +64,9 @@ class App {
             })
             .then(res => res.text())
             .then(html => {
-                let newContent = document.createElement("html")
+                const newContent = document.createElement("html")
                 newContent.innerHTML = html
-                let oldContent = document.querySelector("main") 
+                const oldContent = document.querySelector("main") 
                 oldContent.replaceWith(newContent.querySelector("main"))  
                 this.checkUrl()
             })
