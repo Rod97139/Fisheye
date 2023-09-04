@@ -1,9 +1,8 @@
 import DataApi from "./api/DataApi.js";
-import Photographer from "./models/Photographer.js";
+// import Photographer from "./models/Photographer.js";
 import { saveToLocalStorage } from "./api/localStorage.js";
 import PhotographerPage from "./pages/PhotographerPage.js";
 import HomePage from "./pages/HomePage.js";
-import { fetchSpaListener } from "./utils/fetchSpaListener.js";
 
 
 class App {
@@ -19,47 +18,43 @@ class App {
     }
 
     async getPhotographers() {
-        let localPhotographers = window.localStorage.getItem("photographers");
-        if (!localPhotographers) {
+        const photographersStorage = window.localStorage.getItem("photographers");
+        if (!photographersStorage) {
             const data = await this.dataApi.get()
             saveToLocalStorage(data)
-            localPhotographers = data.photographers;
+            return data.photographers;
         }else {
-            localPhotographers = JSON.parse(localPhotographers);
+            return JSON.parse(photographersStorage);
         }
-        this.photographers = localPhotographers.map(photographer => new Photographer(photographer))
+        // pas obligatoire
+        // this.photographers = localPhotographers.map(photographer => new Photographer(photographer))
     }
 
     async checkUrl(url = window.location.pathname) {
         this.routes[url]()
+        this.page.main()
         this.page.handleNavBarListener()
     }
 
     async displayhomePage() {
         this.page = new HomePage(this.photographers, this)
-            await this.page.main()
     }
-
 
     async displayPhotographerPage() {
         const urlParams = new URLSearchParams(window.location.search);
+        const photographerId = urlParams.get('id');
 
-        if (urlParams.get('id') !== undefined && urlParams.get('id') !== null && urlParams.get('id') !== '') {
-            const photographerId = urlParams.get('id');
-            this.page = new PhotographerPage(photographerId, this.photographers, this);
-            this.page.main();
+        // retourner true ou false si l'id du photographe existe dans le tableau des photographes
+        const photographerExist = this.photographers.some(photographer => photographer.id === parseInt(photographerId))
+        // Si l'id du photographe existe, on instancie la page du photographe, sinon on redirige vers la page d'accueil
+        photographerExist ? this.page = new PhotographerPage(photographerId, this.photographers, this) : document.location.href = 'index.html'
 
-
-        } else   {
-            document.location.href = 'index.html'
-        }
     }
 
     async main() {
         
-        await this.getPhotographers()
+        this.photographers = await this.getPhotographers() 
         await this.checkUrl()
-        
 
         // Le referrer est vide ou invalide lorsque l'utilisateur clique sur prédédent ou suivant
         window.onpopstate = () => {
