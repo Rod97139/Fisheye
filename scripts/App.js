@@ -12,9 +12,9 @@ class App {
         this.dataApi = new DataApi('data/photographers.json')
         this.photographers = []
         this.routes = {
-            '/' : () => this.displayhomePage(),
-            '/index.html' : () => this.displayhomePage(),
-            '/photographer.html' : () => this.displayPhotographerPage()
+            '/Fisheye/' : () => this.displayhomePage(),
+            '/Fisheye/index.html' : () => this.displayhomePage(),
+            '/Fisheye/photographer.html' : () => this.displayPhotographerPage()
         }
     }
 
