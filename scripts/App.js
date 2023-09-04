@@ -30,8 +30,8 @@ class App {
         this.photographers = localPhotographers.map(photographer => new Photographer(photographer))
     }
 
-    async checkUrl() {
-        this.routes[window.location.pathname]()
+    async checkUrl(url = window.location.pathname) {
+        this.routes[url]()
         this.page.handleNavBarListener()
     }
 
