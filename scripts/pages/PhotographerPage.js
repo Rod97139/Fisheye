@@ -24,7 +24,7 @@ class PhotographerPage extends Page {
         this.medias = localMedias.map(media => new Media(media))
     }
 
-    displayExpo (medias, photographer) {
+    async displayExpo (medias, photographer) {
         // for of plus rapide que forEach
         for (const media of medias) {
             const mediaModel = expoTemplate(media, photographer);
@@ -33,10 +33,11 @@ class PhotographerPage extends Page {
         }
     }
 
-    displayPhotographerData (photographer) {
+    async displayPhotographerData (photographer) {
+
     }
 
-    removeNavNosPhotographe() {
+    async removeNavNosPhotographe() {
         document.querySelector('header h1') && document.querySelector('header h1').remove()
     }
 
@@ -46,6 +47,7 @@ class PhotographerPage extends Page {
     //    this.displayPhotographer(this.photographer)
         this.displayExpo(this.medias, this.photographer)
         this.removeNavNosPhotographe()
+        this.displayPhotographerData(this.photographer)
 
     }
 }

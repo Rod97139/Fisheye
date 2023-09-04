@@ -26,7 +26,7 @@ class App {
         }else {
             return JSON.parse(photographersStorage);
         }
-        // pas obligatoire
+        // pas obligatoire ... pour l'instant 
         // this.photographers = localPhotographers.map(photographer => new Photographer(photographer))
     }
 
