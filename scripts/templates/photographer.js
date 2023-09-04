@@ -1,3 +1,5 @@
+import { fetchSpaListener } from "../utils/fetchSpaListener.js";
+
 export const photographerTemplate = (data) => {
     const { name, portrait } = data;
 
@@ -17,4 +19,10 @@ export const photographerTemplate = (data) => {
         return (article);
     }
     return { name, picture, getUserCardDOM }
+}
+
+export const listenerPhotographerLinks = (App, links) => {
+    links.forEach(link => {
+        fetchSpaListener(link, App)
+    })
 }

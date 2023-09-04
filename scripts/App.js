@@ -1,8 +1,8 @@
 import DataApi from "./api/DataApi.js";
 import Photographer from "./models/Photographer.js";
 import { saveToLocalStorage } from "./api/localStorage.js";
-import PhotographerPage from "./pages/Photographer.js";
-import HomePage from "./pages/Home.js";
+import PhotographerPage from "./pages/PhotographerPage.js";
+import HomePage from "./pages/HomePage.js";
 
 
 class App {
@@ -10,6 +10,11 @@ class App {
     constructor() {
         this.dataApi = new DataApi('data/photographers.json')
         this.photographers = []
+        this.routes = {
+            '/' : () => this.displayhomePage(),
+            '/index.html' : () => this.displayhomePage(),
+            '/photographer.html' : () => this.displayPhotographerPage()
+        }
     }
 
     async getPhotographers() {
@@ -25,66 +30,27 @@ class App {
     }
 
     async checkUrl() {
+        this.routes[window.location.pathname]()
+        this.page.handleNavBarListener()
+    }
+
+    async displayhomePage() {
+        this.page = new HomePage(this.photographers, this)
+            await this.page.main()
+    }
+
+
+    async displayPhotographerPage() {
         const urlParams = new URLSearchParams(window.location.search);
-        const pathName = window.location.pathname
 
-        if (window.location.pathname === '/photographer.html') {
-            if (urlParams.get('id')) {
-                const photographerId = urlParams.get('id');
-                const photographerPage = new PhotographerPage(photographerId, this.photographers);
-                photographerPage.main();
+        if (urlParams.get('id')) {
+            const photographerId = urlParams.get('id');
+            this.page = new PhotographerPage(photographerId, this.photographers, this);
+            this.page.main();
 
-                const links = document.querySelectorAll('a')
-                links.forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault()
-                        const url = link.getAttribute('href')
-                        history.pushState({}, null, url)
-                        
-                        fetch(url, {
-                            method: "get"
-                        })
-                        .then(res => res.text())
-                        .then(html => {
-                            let content = document.createElement("html")
-                            content.innerHTML = html
-                            let oldContent = document.querySelector("html") 
-                            
-                
-                            oldContent.innerHTML = html
-                            this.checkUrl()
-                            
-                        })    
-                    })
-                })
-            }
-        } else {
-            const homePage = new HomePage(this.photographers)
-            await homePage.main()
 
-            const links = document.querySelectorAll('a')
-            links.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault()
-                    const url = link.getAttribute('href')
-                    history.pushState({}, null, url)
-                    
-                    fetch(url, {
-                        method: "get"
-                    })
-                    .then(res => res.text())
-                    .then(html => {
-                        let content = document.createElement("html")
-                        content.innerHTML = html
-                        let oldContent = document.querySelector("html") 
-                        
-            
-                        oldContent.innerHTML = html
-                        this.checkUrl()
-                        
-                    })    
-                })
-            })
+        } else   {
+            this.displayhomePage()
         }
     }
 
@@ -100,22 +66,13 @@ class App {
             })
             .then(res => res.text())
             .then(html => {
-                let oldContent = document.querySelector("html") 
-                oldContent.innerHTML = html
+                let newContent = document.createElement("html")
+                newContent.innerHTML = html
+                let oldContent = document.querySelector("main") 
+                oldContent.replaceWith(newContent.querySelector("main"))  
                 this.checkUrl()
             })
         }
-
-        // export const createScriptElement: (url: string) => HTMLScriptElement = url => {
-        //     const element: HTMLScriptElement = document.createElement('script');
-        //     element.setAttribute('src', url);
-        //     element.setAttribute('type', 'text/javascript');
-          
-        //     return element;
-        //   };
-          
-
-
     }
 }
 

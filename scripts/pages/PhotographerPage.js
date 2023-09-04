@@ -1,12 +1,14 @@
 import Media from "../models/Media.js";
 import Photographer from "../models/Photographer.js";
 import { expoTemplate } from "../templates/Expo.js";
+import Page from "./Page.js";
 
 
 
-class PhotographerPage {
+class PhotographerPage extends Page {
 
-    constructor(id, photographers) {
+    constructor(id, photographers, App) {
+        super(App)
         this.photographerId = id;
         this.photographers = photographers
         this.$expoWrapper = document.querySelector('.expo_section')
@@ -35,11 +37,16 @@ class PhotographerPage {
     displayPhotographer (photographer) {
     }
 
+    removeNavNosPhotographe() {
+        document.querySelector('header h1') && document.querySelector('header h1').remove()
+    }
+
     async main() {
         await this.getPhotographer()
         await this.getMedias()
     //    this.displayPhotographer(this.photographer)
        this.displayExpo(this.medias, this.photographer)
+         this.removeNavNosPhotographe()
 
     }
 }
