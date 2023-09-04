@@ -3,6 +3,7 @@ import Photographer from "./models/Photographer.js";
 import { saveToLocalStorage } from "./api/localStorage.js";
 import PhotographerPage from "./pages/PhotographerPage.js";
 import HomePage from "./pages/HomePage.js";
+import { fetchSpaListener } from "./utils/fetchSpaListener.js";
 
 
 class App {
@@ -43,14 +44,14 @@ class App {
     async displayPhotographerPage() {
         const urlParams = new URLSearchParams(window.location.search);
 
-        if (urlParams.get('id')) {
+        if (urlParams.get('id') !== undefined && urlParams.get('id') !== null && urlParams.get('id') !== '') {
             const photographerId = urlParams.get('id');
             this.page = new PhotographerPage(photographerId, this.photographers, this);
             this.page.main();
 
 
         } else   {
-            this.displayhomePage()
+            document.location.href = 'index.html'
         }
     }
 
@@ -59,6 +60,8 @@ class App {
         await this.getPhotographers()
         await this.checkUrl()
         
+
+        // Le referrer est vide ou invalide lorsque l'utilisateur clique sur prédédent ou suivant
         window.onpopstate = () => {
             const url = window.location.href
             fetch(url, {

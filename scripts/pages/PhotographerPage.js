@@ -1,6 +1,6 @@
 import Media from "../models/Media.js";
 import Photographer from "../models/Photographer.js";
-import { expoTemplate } from "../templates/Expo.js";
+import { expoTemplate } from "../templates/expo.js";
 import Page from "./Page.js";
 
 
@@ -16,7 +16,7 @@ class PhotographerPage extends Page {
     }
 
     async getPhotographer() {
-        let localPhotographers = this.photographers
+        const localPhotographers = this.photographers
         this.photographer = new Photographer(localPhotographers.filter((photographer) => photographer.id == this.photographerId)[0]);
     }
     
