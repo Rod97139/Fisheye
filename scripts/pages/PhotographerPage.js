@@ -1,5 +1,4 @@
 import Media from "../models/Media.js";
-import Photographer from "../models/Photographer.js";
 import { expoTemplate } from "../templates/expo.js";
 import Page from "./Page.js";
 
@@ -16,28 +15,29 @@ class PhotographerPage extends Page {
     }
 
     async getPhotographer() {
-        const localPhotographers = this.photographers
-        this.photographer = new Photographer(localPhotographers.filter((photographer) => photographer.id == this.photographerId)[0]);
+        // une methode plus rapide que filter pour trouver le photographe   
+        this.photographer = this.photographers.find((photographer) => photographer.id == this.photographerId);
     }
     
     async getMedias() {
-        let localMedias = window.localStorage.getItem(`media-${this.photographerId}`);
-        localMedias = JSON.parse(localMedias);
+        const localMedias = JSON.parse(window.localStorage.getItem(`media-${this.photographerId}`));
         this.medias = localMedias.map(media => new Media(media))
     }
 
-    displayExpo (medias, photographer) {
-        medias.forEach(media => {
+    async displayExpo (medias, photographer) {
+        // for of plus rapide que forEach
+        for (const media of medias) {
             const mediaModel = expoTemplate(media, photographer);
             const userCardDOM = mediaModel.getUserCardDOM();
             this.$expoWrapper.appendChild(userCardDOM);
-        })
+        }
     }
 
-    displayPhotographer (photographer) {
+    async displayPhotographerData (photographer) {
+
     }
 
-    removeNavNosPhotographe() {
+    async removeNavNosPhotographe() {
         document.querySelector('header h1') && document.querySelector('header h1').remove()
     }
 
@@ -45,8 +45,9 @@ class PhotographerPage extends Page {
         await this.getPhotographer()
         await this.getMedias()
     //    this.displayPhotographer(this.photographer)
-       this.displayExpo(this.medias, this.photographer)
-         this.removeNavNosPhotographe()
+        this.displayExpo(this.medias, this.photographer)
+        this.removeNavNosPhotographe()
+        this.displayPhotographerData(this.photographer)
 
     }
 }
