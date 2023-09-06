@@ -1,6 +1,7 @@
 import Media from "../models/Media.js";
-import { expoTemplate } from "../templates/expo.js";
+import { expoPhotographerTemplate, expoTemplate } from "../templates/expo.js";
 import Page from "./Page.js";
+import { displayModal } from "../utils/contactForm.js";
 
 
 
@@ -28,17 +29,31 @@ class PhotographerPage extends Page {
         // for of plus rapide que forEach
         for (const media of medias) {
             const mediaModel = expoTemplate(media, photographer);
-            const userCardDOM = mediaModel.getUserCardDOM();
-            this.$expoWrapper.appendChild(userCardDOM);
+            const expoCardDOM = mediaModel.getExpoCardDOM();
+            this.$expoWrapper.appendChild(expoCardDOM);
         }
     }
 
     async displayPhotographerData (photographer) {
-
+        const photographerModel = expoPhotographerTemplate(photographer);
+        const expoPhotographerCardDOM = photographerModel.getExpoPhotographerCardDOM();
+        const $expoPhotographerWrapper = document.querySelector('.photograph-header')
+        $expoPhotographerWrapper.appendChild(expoPhotographerCardDOM);
     }
 
     async removeNavNosPhotographe() {
         document.querySelector('header h1') && document.querySelector('header h1').remove()
+    }
+
+    async handleModalForm () {
+        const $contactBtn = document.querySelector('.contact_button')
+        $contactBtn.addEventListener('click', () => {
+            const modal = displayModal()
+            const $closeBtn = document.querySelector('.modal img')
+            $closeBtn.addEventListener('click', () => {
+                modal.remove()
+            })
+        })
     }
 
     async main() {
@@ -48,7 +63,7 @@ class PhotographerPage extends Page {
         this.displayExpo(this.medias, this.photographer)
         this.removeNavNosPhotographe()
         this.displayPhotographerData(this.photographer)
-
+        this.handleModalForm()
     }
 }
 
