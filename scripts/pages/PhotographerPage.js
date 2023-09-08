@@ -45,13 +45,28 @@ class PhotographerPage extends Page {
         document.querySelector('header h1') && document.querySelector('header h1').remove()
     }
 
+    async handleLightbox () {
+        const $mediaCards = document.querySelectorAll('.expo_section article')
+
+        for (const $mediaCard of $mediaCards) {
+            $mediaCard.addEventListener('click', () => {
+                console.log('click')
+                // const lightbox = displayLightbox()
+                // const $closeBtn = document.querySelector('.lightbox img')
+                // $closeBtn.addEventListener('click', () => {
+                //     lightbox.style.display = 'none'
+                // })
+            })
+        }
+    }
+
     async handleModalForm () {
         const $contactBtn = document.querySelector('.contact_button')
         $contactBtn.addEventListener('click', () => {
             const modal = displayModal()
             const $closeBtn = document.querySelector('.modal img')
             $closeBtn.addEventListener('click', () => {
-                modal.remove()
+                modal.style.display = 'none'
             })
         })
     }
@@ -64,6 +79,7 @@ class PhotographerPage extends Page {
         this.removeNavNosPhotographe()
         this.displayPhotographerData(this.photographer)
         this.handleModalForm()
+        this.handleLightbox ()
     }
 }
 
