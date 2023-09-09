@@ -2,7 +2,7 @@ import Media from "../models/Media.js";
 import { expoPhotographerTemplate, expoTemplate } from "../templates/expo.js";
 import Page from "./Page.js";
 import { displayModal } from "../utils/contactForm.js";
-import { displayLightbox } from "../utils/lightbox.js";
+import { currentSlide, displayLightbox } from "../utils/lightbox.js";
 
 
 
@@ -35,9 +35,9 @@ class PhotographerPage extends Page {
         const myArray = this.photographer.name.split(" ");
         const firstName = myArray[0];
         for (const media of medias) {
+            
+            
             const temp = new Media(media);
-            console.log(lightboxContent);
-
             lightboxContent.innerHTML += `<div class="mySlides">
             <img src="assets/media/${firstName}/${temp.file}" style="width:100%">
           </div>`
@@ -60,22 +60,33 @@ class PhotographerPage extends Page {
     }
 
     async handleLightbox () {
-        const lightbox = displayLightbox()
+        const lightbox = document.querySelector('#myLightbox')
 
         const $mediaCards = document.querySelectorAll('.expo_section article')
+        
+        let i = 0
 
         for (const $mediaCard of $mediaCards) {
+            ++i
+            console.log(i);
+
             
 
-            $mediaCard.addEventListener('click', () => {
+            $mediaCard.addEventListener('click', ((index) => {
+
+                return () => {
+                
+                console.log(index);
+                currentSlide(index)
                 lightbox.style.display = 'block'
                 console.log('click')
+                }
                 
                 // const $closeBtn = document.querySelector('.lightbox img')
                 // $closeBtn.addEventListener('click', () => {
                 //     lightbox.style.display = 'none'
                 // })
-            })
+            })(i)) // closure pour regler probleme de scope
         }
     }
 

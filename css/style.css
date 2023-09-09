@@ -10,6 +10,10 @@ body {
     
 }
 
+.mySlides {
+    display: none;
+}
+
 header {
     display: flex;
     flex-direction: row;
