@@ -5,6 +5,10 @@ body {
     margin: 0;
 }
 
+#myLightbox {
+    display: none;
+    
+}
 
 header {
     display: flex;

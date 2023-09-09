@@ -2,6 +2,7 @@ import Media from "../models/Media.js";
 import { expoPhotographerTemplate, expoTemplate } from "../templates/expo.js";
 import Page from "./Page.js";
 import { displayModal } from "../utils/contactForm.js";
+import { displayLightbox } from "../utils/lightbox.js";
 
 
 
@@ -21,14 +22,27 @@ class PhotographerPage extends Page {
     }
     
     async getMedias() {
-        const localMedias = JSON.parse(window.localStorage.getItem(`media-${this.photographerId}`));
-        this.medias = localMedias.map(media => new Media(media))
+        this.medias = JSON.parse(window.localStorage.getItem(`media-${this.photographerId}`));
+        // const localMedias = JSON.parse(window.localStorage.getItem(`media-${this.photographerId}`));
+        // this.medias = localMedias
+        //     .map(media => new Media(media))
     }
 
     async displayExpo (medias, photographer) {
         // for of plus rapide que forEach
+        displayLightbox()
+        const lightboxContent = document.querySelector('.lightbox-content')
+        const myArray = this.photographer.name.split(" ");
+        const firstName = myArray[0];
         for (const media of medias) {
-            const mediaModel = expoTemplate(media, photographer);
+            const temp = new Media(media);
+            console.log(lightboxContent);
+
+            lightboxContent.innerHTML += `<div class="mySlides">
+            <img src="assets/media/${firstName}/${temp.file}" style="width:100%">
+          </div>`
+
+            const mediaModel = expoTemplate(temp, photographer);
             const expoCardDOM = mediaModel.getExpoCardDOM();
             this.$expoWrapper.appendChild(expoCardDOM);
         }
@@ -46,12 +60,17 @@ class PhotographerPage extends Page {
     }
 
     async handleLightbox () {
+        const lightbox = displayLightbox()
+
         const $mediaCards = document.querySelectorAll('.expo_section article')
 
         for (const $mediaCard of $mediaCards) {
+            
+
             $mediaCard.addEventListener('click', () => {
+                lightbox.style.display = 'block'
                 console.log('click')
-                // const lightbox = displayLightbox()
+                
                 // const $closeBtn = document.querySelector('.lightbox img')
                 // $closeBtn.addEventListener('click', () => {
                 //     lightbox.style.display = 'none'
@@ -74,12 +93,12 @@ class PhotographerPage extends Page {
     async main() {
         await this.getPhotographer()
         await this.getMedias()
-    //    this.displayPhotographer(this.photographer)
+        //    this.displayPhotographer(this.photographer)
         this.displayExpo(this.medias, this.photographer)
         this.removeNavNosPhotographe()
         this.displayPhotographerData(this.photographer)
         this.handleModalForm()
-        this.handleLightbox ()
+        this.handleLightbox ()  
     }
 }
 
