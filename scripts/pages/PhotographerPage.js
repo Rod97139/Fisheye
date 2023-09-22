@@ -39,7 +39,7 @@ class PhotographerPage extends Page {
             
             const temp = new Media(media);
             lightboxContent.innerHTML += `<div class="mySlides">
-            <img src="assets/media/${firstName}/${temp.file}" style="width:100%">
+            <img src="assets/media/${firstName}/${temp.bigFile}" style="width:100%">
           </div>`
 
             const mediaModel = expoTemplate(temp, photographer);
@@ -86,7 +86,7 @@ class PhotographerPage extends Page {
                 // $closeBtn.addEventListener('click', () => {
                 //     lightbox.style.display = 'none'
                 // })
-            })(i)) // closure pour regler probleme de scope
+            })(i)) // closure pour regler probleme de scope/portée
         }
     }
 

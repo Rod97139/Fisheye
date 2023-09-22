@@ -76,4 +76,10 @@ form input {
   width: 200px;
 }
 
+#myLightbox {
+  display: flex;
+  position: absolute;
+  top: 0;
+}
+
 /*# sourceMappingURL=photographer.css.map */
