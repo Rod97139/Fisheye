@@ -79,4 +79,13 @@ form input {
 #myLightbox {
     position: absolute;
     top: 0;
+    
+    .mySlides {
+        img {
+            height: 50%;
+            margin: auto;
+            text-align: center;
+            width: 50%;
+        }
+    }
 }

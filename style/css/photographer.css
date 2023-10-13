@@ -80,5 +80,11 @@ form input {
   position: absolute;
   top: 0;
 }
+#myLightbox .mySlides img {
+  height: 50%;
+  margin: auto;
+  text-align: center;
+  width: 50%;
+}
 
 /*# sourceMappingURL=photographer.css.map */

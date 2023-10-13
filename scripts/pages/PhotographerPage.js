@@ -39,7 +39,7 @@ class PhotographerPage extends Page {
             
             const temp = new Media(media);
             lightboxContent.innerHTML += `<div class="mySlides">
-            <img src="assets/media/${firstName}/${temp.bigFile}" style="width:100%">
+            <img src="assets/media/${firstName}/${temp.bigFile}">
           </div>`
 
             const mediaModel = expoTemplate(temp, photographer);
