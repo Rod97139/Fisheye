@@ -69,11 +69,9 @@ class PhotographerPage extends Page {
             currentSlide(media)
             lightbox.style.display = 'block'
         }
-
-        const $mediaCards = document.querySelectorAll('.expo_section article')
         
+        const $mediaCards = document.querySelectorAll('.expo_section article')
         let i = 0
-
         for (const $mediaCard of $mediaCards) {
             ++i
             $mediaCard.addEventListener('click', ((index) => {
