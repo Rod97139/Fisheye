@@ -77,12 +77,15 @@ form input {
 }
 
 #myLightbox {
+  margin-top: 500px;
   position: absolute;
+  background-color: #312E2E;
   top: 0;
 }
 #myLightbox .mySlides img {
+  display: flex;
   height: 50%;
-  margin: auto;
+  margin-inline: auto;
   text-align: center;
   width: 50%;
 }
