@@ -34,7 +34,7 @@ export const showSlides = (n) => {
     let slideIndex = n;
     // var dots = document.getElementsByClassName("demo");
     // var captionText = document.getElementById("caption");
-    console.log(slides, n);
+    
     if (n > slides.length) {slideIndex = 1}
     if (n < 1) {slideIndex = slides.length}
     for (i = 0; i < slides.length; i++) {
@@ -44,7 +44,7 @@ export const showSlides = (n) => {
     //   dots[i].className = dots[i].className.replace(" active", "");
     // }
     slides[slideIndex-1].style.display = "block";
-    console.log(slides[slideIndex-1]);
+    
     // dots[slideIndex-1].className += " active";
     // captionText.innerHTML = dots[slideIndex-1].alt;
   }

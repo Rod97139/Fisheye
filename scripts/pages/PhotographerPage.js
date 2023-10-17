@@ -60,7 +60,15 @@ class PhotographerPage extends Page {
     }
 
     async handleLightbox () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const media = urlParams.get('media');
         const lightbox = document.querySelector('#myLightbox')
+        
+        if (media) {
+            console.log(media);
+            currentSlide(media)
+            lightbox.style.display = 'block'
+        }
 
         const $mediaCards = document.querySelectorAll('.expo_section article')
         
@@ -68,24 +76,12 @@ class PhotographerPage extends Page {
 
         for (const $mediaCard of $mediaCards) {
             ++i
-            console.log(i);
-
-            
-
             $mediaCard.addEventListener('click', ((index) => {
-
                 return () => {
-                
-                console.log(index);
                 currentSlide(index)
                 lightbox.style.display = 'block'
-                console.log('click')
+                history.pushState({}, '', `?id=${this.photographerId}&media=${index}`)
                 }
-                
-                // const $closeBtn = document.querySelector('.lightbox img')
-                // $closeBtn.addEventListener('click', () => {
-                //     lightbox.style.display = 'none'
-                // })
             })(i)) // closure pour regler probleme de scope/portée
         }
     }
@@ -104,7 +100,6 @@ class PhotographerPage extends Page {
     async main() {
         await this.getPhotographer()
         await this.getMedias()
-        //    this.displayPhotographer(this.photographer)
         this.displayExpo(this.medias, this.photographer)
         this.removeNavNosPhotographe()
         this.displayPhotographerData(this.photographer)
