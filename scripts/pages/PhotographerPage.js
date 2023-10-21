@@ -30,17 +30,19 @@ class PhotographerPage extends Page {
 
     async displayExpo (medias, photographer) {
         // for of plus rapide que forEach
-        displayLightbox()
+        displayLightbox(photographer.id)
         const lightboxContent = document.querySelector('.lightbox-content')
         const myArray = this.photographer.name.split(" ");
         const firstName = myArray[0];
+        
         for (const media of medias) {
-            
-            
+
             const temp = new Media(media);
             lightboxContent.innerHTML += `<div class="mySlides">
-            <img src="assets/media/${firstName}/${temp.bigFile}">
-          </div>`
+                                            <img src="assets/media/${firstName}/${temp.bigFile}">
+                                            <a class="prev">prev</a>
+                                            <a class="next">next</a>
+                                          </div>`
 
             const mediaModel = expoTemplate(temp, photographer);
             const expoCardDOM = mediaModel.getExpoCardDOM();
@@ -65,15 +67,34 @@ class PhotographerPage extends Page {
         const lightbox = document.querySelector('#myLightbox')
         
         if (media) {
-            console.log(media);
             currentSlide(media)
             lightbox.style.display = 'block'
         }
         
         const $mediaCards = document.querySelectorAll('.expo_section article')
         let i = 0
+        const $mySlides = document.querySelectorAll('.mySlides')
         for (const $mediaCard of $mediaCards) {
             ++i
+            const prevButton = $mySlides[i-1].querySelector('.prev')
+            const nextButton = $mySlides[i-1].querySelector('.next')
+            console.log(i);
+
+            prevButton.addEventListener('click', ((index) => {
+                return () => {
+                currentSlide(parseInt(index) - 1)
+                history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(index) - 1}`)
+                }
+            })(i))
+            
+            nextButton.addEventListener('click', ((index) => {
+                return () => {
+                console.log('next', index, parseInt(i) + 1);
+                currentSlide(parseInt(index) + 1)
+                history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(index) + 1}`)
+                }
+            })(i))
+
             $mediaCard.addEventListener('click', ((index) => {
                 return () => {
                 currentSlide(index)
