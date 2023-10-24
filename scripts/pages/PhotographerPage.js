@@ -14,6 +14,7 @@ class PhotographerPage extends Page {
         this.photographers = photographers
         this.$expoWrapper = document.querySelector('.expo_section')
         this.medias = []
+        this.displaiedMedia = null 
     }
 
     async getPhotographer() {
@@ -62,9 +63,10 @@ class PhotographerPage extends Page {
     }
 
     async handleLightbox () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const media = urlParams.get('media');
         const lightbox = document.querySelector('#myLightbox')
+        const urlParams = new URLSearchParams(window.location.search);
+        const media = urlParams.get('media')
+        this.displaiedMedia = media
         
         if (media) {
             currentSlide(media)
@@ -78,30 +80,43 @@ class PhotographerPage extends Page {
             ++i
             const prevButton = $mySlides[i-1].querySelector('.prev')
             const nextButton = $mySlides[i-1].querySelector('.next')
-            console.log(i);
 
             prevButton.addEventListener('click', ((index) => {
                 return () => {
-                currentSlide(parseInt(index) - 1)
-                history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(index) - 1}`)
+                    currentSlide(parseInt(index) - 1)
+                    history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(index) - 1}`)
+                    this.displaiedMedia = parseInt(index) - 1
                 }
             })(i))
             
             nextButton.addEventListener('click', ((index) => {
                 return () => {
-                console.log('next', index, parseInt(i) + 1);
-                currentSlide(parseInt(index) + 1)
-                history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(index) + 1}`)
+                    currentSlide(parseInt(index) + 1)
+                    history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(index) + 1}`)
+                    this.displaiedMedia = parseInt(index) + 1
                 }
             })(i))
 
             $mediaCard.addEventListener('click', ((index) => {
                 return () => {
-                currentSlide(index)
-                lightbox.style.display = 'block'
-                history.pushState({}, '', `?id=${this.photographerId}&media=${index}`)
+                    currentSlide(index)
+                    lightbox.style.display = 'block'
+                    history.pushState({}, '', `?id=${this.photographerId}&media=${index}`)
+                    this.displaiedMedia = index
                 }
             })(i)) // closure pour regler probleme de scope/portée
+        }
+
+        if (this.displaiedMedia === null) {
+            document.addEventListener('keydown', (event) => {
+                if ((event.key === 'ArrowRight') && (this.displaiedMedia !== null)) {
+                    currentSlide(parseInt(this.displaiedMedia) + 1)
+                    history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(this.displaiedMedia) + 1}`)
+                    this.displaiedMedia = parseInt(this.displaiedMedia) + 1
+                    console.log('Touche de la flèche droite appuyée', parseInt(this.displaiedMedia) + 1);
+                    // Votre code à exécuter ici
+                }
+            })
         }
     }
 
