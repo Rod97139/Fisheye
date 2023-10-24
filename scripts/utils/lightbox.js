@@ -1,4 +1,4 @@
-export const displayLightbox = () => {
+export const displayLightbox = (photographerId) => {
     const lightbox = document.querySelector('#myLightbox')
     if (lightbox) {
       lightbox.style.display = 'block'
@@ -8,15 +8,15 @@ export const displayLightbox = () => {
     newLightbox.id = "myLightbox";
     const lightboxContent = document.createElement("div");
     lightboxContent.classList.add("lightbox-content");
-    const prev = document.createElement("a");
-    const next = document.createElement("a");
-    prev.classList.add("change");
-    next.classList.add("change");
-    prev.textContent = "prev";
-    next.textContent = "next";
+    // const prev = document.createElement("a");
+    // const next = document.createElement("a");
+    // prev.classList.add("change");
+    // next.classList.add("change");
+    // prev.textContent = "prev";
+    // next.textContent = "next";
     newLightbox.appendChild(lightboxContent);
-    newLightbox.appendChild(prev);
-    newLightbox.appendChild(next);
+    // newLightbox.appendChild(prev);
+    // newLightbox.appendChild(next);
     const $main = document.querySelector("main");
     $main.append(newLightbox);
 
@@ -27,11 +27,16 @@ export const displayLightbox = () => {
     changeButtons.forEach((button) => {
       button.addEventListener("click", () => {
         if (button.textContent === "prev") {
-        showSlides(media - 1);
-        history.pushState({}, '', `?id=${this.photographerId}&media=${media - 1}`)
+        showSlides(parseInt(media) - 1);
+        //////*
+        console.log(media, typeof media);
+        ///////*
+        history.pushState({}, '', `?id=${photographerId}&media=${parseInt(media) - 1}`)
         } else {
-        showSlides(media + 1);
-        history.pushState({}, '', `?id=${this.photographerId}&media=${media + 1}`)
+        const media = urlParams.get('media');
+        showSlides(parseInt(media) + 1);
+        
+        history.pushState({}, '', `?id=${photographerId}&media=${parseInt(media) + 1}`)
         }
       });
     });
@@ -60,3 +65,4 @@ export const showSlides = (n) => {
   export const currentSlide = (n) => {
     showSlides(n);
   }
+  
