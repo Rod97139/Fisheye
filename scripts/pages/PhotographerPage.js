@@ -107,17 +107,29 @@ class PhotographerPage extends Page {
             })(i)) // closure pour regler probleme de scope/portée
         }
 
-        if (this.displaiedMedia === null) {
-            document.addEventListener('keydown', (event) => {
-                if ((event.key === 'ArrowRight') && (this.displaiedMedia !== null)) {
-                    currentSlide(parseInt(this.displaiedMedia) + 1)
-                    history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(this.displaiedMedia) + 1}`)
-                    this.displaiedMedia = parseInt(this.displaiedMedia) + 1
-                    console.log('Touche de la flèche droite appuyée', parseInt(this.displaiedMedia) + 1);
-                    // Votre code à exécuter ici
-                }
-            })
-        }
+            // document.addEventListener('keydown', (event) => {
+            //     if ((event.key === 'ArrowRight') && (this.displaiedMedia !== null)) {
+            //         currentSlide(parseInt(this.displaiedMedia) + 1)
+            //         history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(this.displaiedMedia) + 1}`)
+            //         this.displaiedMedia = parseInt(this.displaiedMedia) + 1
+            //         console.log('Touche de la flèche droite appuyée', parseInt(this.displaiedMedia) + 1);
+            //     }
+            // })
+
+            // document.removeEventListener('keydown', (event) => {
+            //     if ((event.key === 'ArrowRight') && (this.displaiedMedia !== null)) {
+            //         currentSlide(parseInt(this.displaiedMedia) + 1)
+            //         history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(this.displaiedMedia) + 1}`)
+            //         this.displaiedMedia = parseInt(this.displaiedMedia) + 1
+            //         console.log('Touche de la flèche droite appuyée', parseInt(this.displaiedMedia) + 1);
+            //     }
+            // })
+
+        
+        
+        
+
+        
     }
 
     async handleModalForm () {

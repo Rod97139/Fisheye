@@ -3,6 +3,7 @@ import DataApi from "./api/DataApi.js";
 import { saveToLocalStorage } from "./api/localStorage.js";
 import PhotographerPage from "./pages/PhotographerPage.js";
 import HomePage from "./pages/HomePage.js";
+import { currentSlide} from "./utils/lightbox.js";
 
 
 class App {
@@ -15,6 +16,7 @@ class App {
             '/index.html' : () => this.displayhomePage(),
             '/photographer.html' : () => this.displayPhotographerPage()
         }
+        this.accessibilityEventsEnabled = false
     }
 
     async getPhotographers() {
@@ -38,17 +40,36 @@ class App {
 
     async displayhomePage() {
         this.page = new HomePage(this.photographers, this)
+        this.page.displaiedMedia = null
     }
 
     async displayPhotographerPage() {
         const urlParams = new URLSearchParams(window.location.search);
         const photographerId = urlParams.get('id');
-
         // retourner true ou false si l'id du photographe existe dans le tableau des photographes
         const photographerExist = this.photographers.some(photographer => photographer.id === parseInt(photographerId))
         // Si l'id du photographe existe, on instancie la page du photographe, sinon on redirige vers la page d'accueil
         photographerExist ? this.page = new PhotographerPage(photographerId, this.photographers, this) : document.location.href = 'index.html'
 
+        if (this.accessibilityEventsEnabled === false) {
+            document.addEventListener('keydown', (event) => {
+                if ((event.key === 'ArrowRight') && (this.page.displaiedMedia !== null)) {
+                    currentSlide(parseInt(this.page.displaiedMedia) + 1)
+                    history.pushState({}, '', `?id=${this.page.photographerId}&media=${parseInt(this.page.displaiedMedia) + 1}`)
+                    this.page.displaiedMedia = parseInt(this.page.displaiedMedia) + 1
+                    console.log('Touche de la flèche droite appuyée', parseInt(this.page.displaiedMedia) + 1);
+                }
+            })
+            document.addEventListener('keydown', (event) => {
+                if ((event.key === 'ArrowLeft') && (this.page.displaiedMedia !== null)) {
+                    currentSlide(parseInt(this.page.displaiedMedia) - 1)
+                    history.pushState({}, '', `?id=${this.page.photographerId}&media=${parseInt(this.page.displaiedMedia) - 1}`)
+                    this.page.displaiedMedia = parseInt(this.page.displaiedMedia) - 1
+                    console.log('Touche de la flèche gauche appuyée', parseInt(this.page.displaiedMedia) - 1);
+                }
+            })
+            this.accessibilityEventsEnabled = true;
+        }
     }
 
     async main() {
