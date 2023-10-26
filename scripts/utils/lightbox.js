@@ -42,18 +42,22 @@ export const accessibilityEvents = (App) => {
   if (App.accessibilityEventsEnabled === false) {
     document.addEventListener('keydown', (event) => {
         if ((event.key === 'ArrowRight') && (App.page.displaiedMedia !== null)) {
-            currentSlide(parseInt(App.page.displaiedMedia) + 1)
-            history.pushState({}, '', `?id=${App.page.photographerId}&media=${parseInt(App.page.displaiedMedia) + 1}`)
-            App.page.displaiedMedia = parseInt(App.page.displaiedMedia) + 1
-            console.log('Touche de la flèche droite appuyée', parseInt(App.page.displaiedMedia) + 1);
+            let slideIndex = parseInt(App.page.displaiedMedia) + 1;
+            currentSlide(slideIndex)
+            if (slideIndex > App.page.medias.length) {slideIndex = 1}
+            history.pushState({}, '', `?id=${App.page.photographerId}&media=${slideIndex}`)
+            App.page.displaiedMedia = slideIndex
+            console.log('Touche de la flèche droite appuyée', slideIndex);
         }
     })
     document.addEventListener('keydown', (event) => {
         if ((event.key === 'ArrowLeft') && (App.page.displaiedMedia !== null)) {
-            currentSlide(parseInt(App.page.displaiedMedia) - 1)
-            history.pushState({}, '', `?id=${App.page.photographerId}&media=${parseInt(App.page.displaiedMedia) - 1}`)
-            App.page.displaiedMedia = parseInt(App.page.displaiedMedia) - 1
-            console.log('Touche de la flèche gauche appuyée', parseInt(App.page.displaiedMedia) - 1);
+            let slideIndex = parseInt(App.page.displaiedMedia) - 1;
+            currentSlide(slideIndex)
+            if (slideIndex < 1) {slideIndex = App.page.medias.length}
+            history.pushState({}, '', `?id=${App.page.photographerId}&media=${slideIndex}`)
+            App.page.displaiedMedia = slideIndex
+            console.log('Touche de la flèche gauche appuyée', slideIndex);
         }
     })
     App.accessibilityEventsEnabled = true;
