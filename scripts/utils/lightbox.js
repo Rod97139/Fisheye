@@ -1,4 +1,4 @@
-export const displayLightbox = (photographerId) => {
+export const displayLightbox = () => {
     const lightbox = document.querySelector('#myLightbox')
     if (lightbox) {
       lightbox.style.display = 'block'
@@ -8,38 +8,10 @@ export const displayLightbox = (photographerId) => {
     newLightbox.id = "myLightbox";
     const lightboxContent = document.createElement("div");
     lightboxContent.classList.add("lightbox-content");
-    // const prev = document.createElement("a");
-    // const next = document.createElement("a");
-    // prev.classList.add("change");
-    // next.classList.add("change");
-    // prev.textContent = "prev";
-    // next.textContent = "next";
     newLightbox.appendChild(lightboxContent);
-    // newLightbox.appendChild(prev);
-    // newLightbox.appendChild(next);
     const $main = document.querySelector("main");
     $main.append(newLightbox);
 
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const media = urlParams.get('media');
-    const changeButtons = document.querySelectorAll(".change");
-    changeButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        if (button.textContent === "prev") {
-        showSlides(parseInt(media) - 1);
-        //////*
-        console.log(media, typeof media);
-        ///////*
-        history.pushState({}, '', `?id=${photographerId}&media=${parseInt(media) - 1}`)
-        } else {
-        const media = urlParams.get('media');
-        showSlides(parseInt(media) + 1);
-        
-        history.pushState({}, '', `?id=${photographerId}&media=${parseInt(media) + 1}`)
-        }
-      });
-    });
 
     // const $closeBtn = document.querySelector('.lightbox img')
     // $closeBtn.addEventListener('click', () => {
@@ -62,7 +34,32 @@ export const showSlides = (n) => {
     slides[slideIndex-1].style.display = "block";
   }
 
-  export const currentSlide = (n) => {
+export const currentSlide = (n) => {
     showSlides(n);
+}
+
+export const accessibilityEvents = (App) => {
+  if (App.accessibilityEventsEnabled === false) {
+    document.addEventListener('keydown', (event) => {
+        if ((event.key === 'ArrowRight') && (App.page.displaiedMedia !== null)) {
+            let slideIndex = parseInt(App.page.displaiedMedia) + 1;
+            currentSlide(slideIndex)
+            if (slideIndex > App.page.medias.length) {slideIndex = 1}
+            history.pushState({}, '', `?id=${App.page.photographerId}&media=${slideIndex}`)
+            App.page.displaiedMedia = slideIndex
+            console.log('Touche de la flèche droite appuyée', slideIndex);
+        }
+    })
+    document.addEventListener('keydown', (event) => {
+        if ((event.key === 'ArrowLeft') && (App.page.displaiedMedia !== null)) {
+            let slideIndex = parseInt(App.page.displaiedMedia) - 1;
+            currentSlide(slideIndex)
+            if (slideIndex < 1) {slideIndex = App.page.medias.length}
+            history.pushState({}, '', `?id=${App.page.photographerId}&media=${slideIndex}`)
+            App.page.displaiedMedia = slideIndex
+            console.log('Touche de la flèche gauche appuyée', slideIndex);
+        }
+    })
+    App.accessibilityEventsEnabled = true;
   }
-  
+}

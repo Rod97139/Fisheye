@@ -83,17 +83,21 @@ class PhotographerPage extends Page {
 
             prevButton.addEventListener('click', ((index) => {
                 return () => {
-                    currentSlide(parseInt(index) - 1)
-                    history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(index) - 1}`)
-                    this.displaiedMedia = parseInt(index) - 1
+                    let slideIndex = parseInt(index) - 1;
+                    currentSlide(slideIndex)
+                    if (slideIndex < 1) {slideIndex = $mediaCards.length}
+                    history.pushState({}, '', `?id=${this.photographerId}&media=${slideIndex}`)
+                    this.displaiedMedia = slideIndex
                 }
             })(i))
             
             nextButton.addEventListener('click', ((index) => {
                 return () => {
-                    currentSlide(parseInt(index) + 1)
-                    history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(index) + 1}`)
-                    this.displaiedMedia = parseInt(index) + 1
+                    let slideIndex = parseInt(index) + 1;
+                    currentSlide(slideIndex)
+                    if (slideIndex > $mediaCards.length) {slideIndex = 1}
+                    history.pushState({}, '', `?id=${this.photographerId}&media=${slideIndex}`)
+                    this.displaiedMedia = slideIndex
                 }
             })(i))
 
@@ -105,18 +109,6 @@ class PhotographerPage extends Page {
                     this.displaiedMedia = index
                 }
             })(i)) // closure pour regler probleme de scope/portée
-        }
-
-        if (this.displaiedMedia === null) {
-            document.addEventListener('keydown', (event) => {
-                if ((event.key === 'ArrowRight') && (this.displaiedMedia !== null)) {
-                    currentSlide(parseInt(this.displaiedMedia) + 1)
-                    history.pushState({}, '', `?id=${this.photographerId}&media=${parseInt(this.displaiedMedia) + 1}`)
-                    this.displaiedMedia = parseInt(this.displaiedMedia) + 1
-                    console.log('Touche de la flèche droite appuyée', parseInt(this.displaiedMedia) + 1);
-                    // Votre code à exécuter ici
-                }
-            })
         }
     }
 
