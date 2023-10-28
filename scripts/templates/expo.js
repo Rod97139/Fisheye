@@ -9,7 +9,7 @@ export const expoTemplate = (data, photographer) => {
         const article = document.createElement( 'article' );
 
         // The same code in the end of the function to fill the article in jsx:
-        article.innerHTML = `<img src="${picture}" alt="${title}">
+        article.innerHTML = `<img src="${picture}" class="expo_img" alt="${title}">
                                 <h2>${title}</h2>`;
                                 
         return (article);
