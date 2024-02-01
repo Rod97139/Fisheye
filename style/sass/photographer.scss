@@ -99,8 +99,12 @@ form input {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 100px;
-    .expo_img {
-        
-        object-fit: cover;
+    a {
+        color: black;
+        text-decoration: none;
+        .expo_img {    
+            cursor: pointer;
+            object-fit: cover;
+        }
     }
 }
