@@ -93,3 +93,24 @@ form input {
         }
     }
 }
+
+.expo_section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 70px;
+    margin-top: 100px;
+    article {
+            color: black;
+            text-decoration: none;
+            .expo_img {    
+                cursor: pointer;
+                object-fit: cover;
+            }
+            .expo_video {
+                cursor: pointer;
+                object-fit: cover;
+                height: 200px;
+                width: 200px;
+            }
+    }
+}

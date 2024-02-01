@@ -9,6 +9,8 @@ export const photographerTemplate = (data) => {
         const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
+        img.setAttribute("alt", name)
+        img.classList.add('photographer_img')
         const link = document.createElement( 'a' );
         link.setAttribute("href", `photographer.html?id=${data.id}`);
         link.appendChild(img);

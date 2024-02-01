@@ -1,8 +1,13 @@
 import Media from "../models/Media.js";
-import { expoPhotographerTemplate, expoTemplate } from "../templates/expo.js";
+import { 
+    // expoImageTemplate,
+     expoPhotographerTemplate } from "../templates/expo.js";
 import Page from "./Page.js";
 import { displayModal } from "../utils/contactForm.js";
 import { currentSlide, displayLightbox } from "../utils/lightbox.js";
+import MediaFactory from "../factory/mediaFactory.js";
+// import MediaFactory from "../factory/mediaFactory.js";
+
 
 
 
@@ -39,14 +44,19 @@ class PhotographerPage extends Page {
         for (const media of medias) {
 
             const temp = new Media(media);
-            lightboxContent.innerHTML += `<div class="mySlides">
-                                            <img src="assets/media/${firstName}/${temp.bigFile}">
-                                            <a class="prev">prev</a>
-                                            <a class="next">next</a>
-                                          </div>`
+            const mediaModel = new MediaFactory(temp, photographer);
+            // lightboxContent.innerHTML += `<div class="mySlides">
+            //                                 <img src="assets/media/${firstName}/${temp.bigFile}">
+            //                                 <a class="prev">prev</a>
+            //                                 <a class="next">next</a>
+            //                               </div>`
+            const lightboxDOM = mediaModel.getLightboxDOM();
+            lightboxContent.appendChild(lightboxDOM);
 
-            const mediaModel = expoTemplate(temp, photographer);
+            // const mediaModel = expoImageTemplate(temp, photographer);
+
             const expoCardDOM = mediaModel.getExpoCardDOM();
+            // console.log(mediaModel.getExpoCardDOM);
             this.$expoWrapper.appendChild(expoCardDOM);
         }
     }
