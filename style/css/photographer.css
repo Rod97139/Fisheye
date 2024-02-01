@@ -96,13 +96,19 @@ form input {
   gap: 70px;
   margin-top: 100px;
 }
-.expo_section a {
+.expo_section article {
   color: black;
   text-decoration: none;
 }
-.expo_section a .expo_img {
+.expo_section article .expo_img {
   cursor: pointer;
   object-fit: cover;
+}
+.expo_section article .expo_video {
+  cursor: pointer;
+  object-fit: cover;
+  height: 200px;
+  width: 200px;
 }
 
 /*# sourceMappingURL=photographer.css.map */

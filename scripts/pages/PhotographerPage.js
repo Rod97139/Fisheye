@@ -44,14 +44,16 @@ class PhotographerPage extends Page {
         for (const media of medias) {
 
             const temp = new Media(media);
-            lightboxContent.innerHTML += `<div class="mySlides">
-                                            <img src="assets/media/${firstName}/${temp.bigFile}">
-                                            <a class="prev">prev</a>
-                                            <a class="next">next</a>
-                                          </div>`
+            const mediaModel = new MediaFactory(temp, photographer);
+            // lightboxContent.innerHTML += `<div class="mySlides">
+            //                                 <img src="assets/media/${firstName}/${temp.bigFile}">
+            //                                 <a class="prev">prev</a>
+            //                                 <a class="next">next</a>
+            //                               </div>`
+            const lightboxDOM = mediaModel.getLightboxDOM();
+            lightboxContent.appendChild(lightboxDOM);
 
             // const mediaModel = expoImageTemplate(temp, photographer);
-            const mediaModel = new MediaFactory(temp, photographer);
 
             const expoCardDOM = mediaModel.getExpoCardDOM();
             // console.log(mediaModel.getExpoCardDOM);
