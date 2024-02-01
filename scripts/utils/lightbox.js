@@ -32,6 +32,8 @@ export const showSlides = (n) => {
       slides[i].style.display = "none";
     }
     slides[slideIndex-1].style.display = "block";
+    const video = slides[slideIndex-1].querySelector('video')
+    video?.play()
   }
 
 export const currentSlide = (n) => {
