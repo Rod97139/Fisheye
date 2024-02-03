@@ -1,11 +1,12 @@
 import Media from "../models/Media.js";
 import { 
     // expoImageTemplate,
-     expoPhotographerTemplate } from "../templates/expo.js";
+     expoPhotographerTemplate, expoSorterTemplate } from "../templates/expo.js";
 import Page from "./Page.js";
 import { displayModal } from "../utils/contactForm.js";
 import { currentSlide, displayLightbox } from "../utils/lightbox.js";
 import MediaFactory from "../factory/mediaFactory.js";
+import { sortBy } from "../utils/sorter.js";
 // import MediaFactory from "../factory/mediaFactory.js";
 
 
@@ -35,28 +36,44 @@ class PhotographerPage extends Page {
     }
 
     async displayExpo (medias, photographer) {
-        // for of plus rapide que forEach
-        displayLightbox(photographer.id)
+        const $expoSorter = document.querySelector('.expo-sorter')
+        $expoSorter.appendChild(expoSorterTemplate())
+        const select = document.querySelector('#sorter')
+        select.addEventListener('change', (e) => {
+
+            console.log(this.medias, 'this.medias');
+
+            sortBy(this.medias, e.target.value)
+
+            // console.log(e.target.value)
+            // console.log(this.medias);
+            
+            const $expoLightBox = document.querySelector('#myLightbox')
+            $expoLightBox.remove()
+            select.remove()
+            this.$expoWrapper.textContent = ''
+
+            const $newWrapper = document.createElement('div')
+            $newWrapper.classList.add('expo_section')
+            document.querySelector('main').appendChild($newWrapper)
+
+            this.displayExpo(this.medias, photographer)
+            this.handleLightbox()
+        })
+        displayLightbox()
         const lightboxContent = document.querySelector('.lightbox-content')
-        const myArray = this.photographer.name.split(" ");
-        const firstName = myArray[0];
         
+        // for of plus rapide que forEach
         for (const media of medias) {
 
             const temp = new Media(media);
             const mediaModel = new MediaFactory(temp, photographer);
-            // lightboxContent.innerHTML += `<div class="mySlides">
-            //                                 <img src="assets/media/${firstName}/${temp.bigFile}">
-            //                                 <a class="prev">prev</a>
-            //                                 <a class="next">next</a>
-            //                               </div>`
+            
             const lightboxDOM = mediaModel.getLightboxDOM();
             lightboxContent.appendChild(lightboxDOM);
 
-            // const mediaModel = expoImageTemplate(temp, photographer);
 
             const expoCardDOM = mediaModel.getExpoCardDOM();
-            // console.log(mediaModel.getExpoCardDOM);
             this.$expoWrapper.appendChild(expoCardDOM);
         }
     }
@@ -140,7 +157,7 @@ class PhotographerPage extends Page {
         this.removeNavNosPhotographe()
         this.displayPhotographerData(this.photographer)
         this.handleModalForm()
-        this.handleLightbox ()  
+        this.handleLightbox()
     }
 }
 
