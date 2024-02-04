@@ -1,3 +1,4 @@
+
 export const expoImageTemplate = (data, photographer) => {
     const { title, file } = data;
     
@@ -64,3 +65,22 @@ export const expoPhotographerTemplate = (data) => {
     }
     return { name, picture, getExpoPhotographerCardDOM }
 }
+
+export const expoSorterTemplate = (Page) => {
+    const select = document.createElement( 'select' );
+    select.id = 'sorter';
+    const options = ['likes', 'date', 'title'];
+    for (const option of options) {
+        const optionDOM = document.createElement( 'option' );
+        optionDOM.value = option;
+        optionDOM.textContent = option;
+        select.appendChild(optionDOM);
+        if (option === Page.sortBy) {
+            optionDOM.setAttribute('selected', true);
+        }
+        // optionDOM.addEventListener('click', (e) => {
+        //     // sortBy(this.medias, e.target.value)
+        // })
+    }
+    return select;
+}   

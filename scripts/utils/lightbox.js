@@ -47,7 +47,7 @@ export const accessibilityEvents = (App) => {
             let slideIndex = parseInt(App.page.displaiedMedia) + 1;
             currentSlide(slideIndex)
             if (slideIndex > App.page.medias.length) {slideIndex = 1}
-            history.pushState({}, '', `?id=${App.page.photographerId}&media=${slideIndex}`)
+            history.pushState({}, '', `?id=${App.page.photographerId}&media=${slideIndex}&sortBy=${App.page.sortBy}`)
             App.page.displaiedMedia = slideIndex
             console.log('Touche de la flèche droite appuyée', slideIndex);
         }
@@ -57,7 +57,7 @@ export const accessibilityEvents = (App) => {
             let slideIndex = parseInt(App.page.displaiedMedia) - 1;
             currentSlide(slideIndex)
             if (slideIndex < 1) {slideIndex = App.page.medias.length}
-            history.pushState({}, '', `?id=${App.page.photographerId}&media=${slideIndex}`)
+            history.pushState({}, '', `?id=${App.page.photographerId}&media=${slideIndex}&sortBy=${App.page.sortBy}`)
             App.page.displaiedMedia = slideIndex
             console.log('Touche de la flèche gauche appuyée', slideIndex);
         }

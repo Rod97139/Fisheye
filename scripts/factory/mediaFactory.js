@@ -1,4 +1,5 @@
 // import { expoImageTemplate } from "../templates/expo";
+// import { sortBy } from "../utils/sorter";
 
 class MediaFactory {
         constructor(data, photographer) {
@@ -80,7 +81,6 @@ class MediaFactory {
                                 video.setAttribute("src", picture)
                                 video.setAttribute("alt", title)
                                 video.setAttribute("controls", true)
-                                video.setAttribute("autoplay", true)
                                 mySlides.appendChild(video);
                                 const prev = document.createElement( 'a' );
                                 prev.classList.add('prev');
