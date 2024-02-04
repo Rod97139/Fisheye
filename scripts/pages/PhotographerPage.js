@@ -105,6 +105,7 @@ class PhotographerPage extends Page {
         if (media) {
             currentSlide(media)
             lightbox.style.display = 'block'
+            lightbox.setAttribute("aria-hidden", "false");
         }
         
         const $mediaCards = document.querySelectorAll('.expo_section article')
@@ -153,6 +154,7 @@ class PhotographerPage extends Page {
                 return () => {
                     currentSlide(index)
                     lightbox.style.display = 'block'
+                    lightbox.setAttribute("aria-hidden", "false");
                     history.pushState({}, '', `?id=${this.photographerId}&media=${index}&sortBy=${this.sortBy}`)
                     this.displaiedMedia = index
                 }
@@ -167,6 +169,7 @@ class PhotographerPage extends Page {
             const $closeBtn = document.querySelector('.modal img')
             $closeBtn.addEventListener('click', () => {
                 modal.style.display = 'none'
+                modal.setAttribute("aria-hidden", "true");
             })
         })
     }

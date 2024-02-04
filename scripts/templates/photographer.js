@@ -10,14 +10,17 @@ export const photographerTemplate = (data) => {
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
         img.setAttribute("alt", name)
+        img.setAttribute("role", "img")
         img.classList.add('photographer_img')
         const link = document.createElement( 'a' );
         link.setAttribute("href", `photographer.html?id=${data.id}`);
+        link.setAttribute("role", "link")
         link.appendChild(img);
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
         const info = document.createElement( 'div' );
         info.classList.add('info');
+        info.setAttribute("role", "info");
         const location = document.createElement( 'p' );
         location.textContent = `${data.city}, ${data.country}`;
         const tagline = document.createElement( 'p' );
@@ -27,9 +30,9 @@ export const photographerTemplate = (data) => {
         info.appendChild(location);
         info.appendChild(tagline);
         info.appendChild(price);
-        article.appendChild(info);
         article.appendChild(link);
         article.appendChild(h2);
+        article.appendChild(info);
         return (article);
     }
     return { name, picture, getUserCardDOM }

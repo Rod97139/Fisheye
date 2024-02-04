@@ -48,6 +48,7 @@ export const expoPhotographerTemplate = (App, data) => {
 
     const getExpoPhotographerCardDOM = () => {
         const article = document.createElement( 'article' );
+        article.setAttribute("aria-label", "Photographer Info");   
         const photographerName = document.createElement( 'h1' );
         photographerName.textContent = name;
         const location = document.createElement( 'p' );

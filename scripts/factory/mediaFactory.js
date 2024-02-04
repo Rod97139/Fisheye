@@ -19,6 +19,7 @@ class MediaFactory {
                         const img = document.createElement( 'img' );
                         img.setAttribute("src", picture)
                         img.setAttribute("alt", title)
+                        
                         img.classList.add('expo_img')
                         const pictureTitle = document.createElement( 'h2' );
                         pictureTitle.textContent = title;
@@ -41,6 +42,7 @@ class MediaFactory {
                         const img = document.createElement( 'img' );
                         img.setAttribute("src", `assets/media/${firstName}/${bigFile}`)
                         img.setAttribute("alt", title)
+                        img.setAttribute("role", "img")
                         mySlides.appendChild(img);
                         const prev = document.createElement( 'a' );
                         prev.classList.add('prev');
@@ -91,6 +93,7 @@ class MediaFactory {
                                 video.setAttribute("src", picture)
                                 video.setAttribute("alt", title)
                                 video.setAttribute("controls", true)
+                                video.setAttribute("role", "video")
                                 mySlides.appendChild(video);
                                 const prev = document.createElement( 'a' );
                                 prev.classList.add('prev');
