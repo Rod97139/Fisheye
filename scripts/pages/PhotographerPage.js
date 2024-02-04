@@ -19,6 +19,7 @@ class PhotographerPage extends Page {
         this.medias = []
         this.displaiedMedia = null
         this.sortBy = 'likes'
+        this.totalLikes = 0
     }
 
     async getPhotographer() {
@@ -65,9 +66,11 @@ class PhotographerPage extends Page {
         const lightboxContent = document.querySelector('.lightbox-content')
         
         // for of plus rapide que forEach
+        this.totalLikes = 0
         for (const media of medias) {
-
+            
             const temp = new Media(media);
+            this.totalLikes += temp.likes
             const mediaModel = new MediaFactory(temp, photographer);
             
             const lightboxDOM = mediaModel.getLightboxDOM();
@@ -77,12 +80,15 @@ class PhotographerPage extends Page {
             const expoCardDOM = mediaModel.getExpoCardDOM();
             this.$expoWrapper.appendChild(expoCardDOM);
         }
+
+        console.log(this.totalLikes);
     }
 
     async displayPhotographerData (photographer) {
-        const photographerModel = expoPhotographerTemplate(photographer);
+        const photographerModel = expoPhotographerTemplate(this, photographer);
         const expoPhotographerCardDOM = photographerModel.getExpoPhotographerCardDOM();
         const $expoPhotographerWrapper = document.querySelector('.photograph-header')
+
         $expoPhotographerWrapper.appendChild(expoPhotographerCardDOM);
     }
 
@@ -99,6 +105,7 @@ class PhotographerPage extends Page {
         if (media) {
             currentSlide(media)
             lightbox.style.display = 'block'
+            lightbox.setAttribute("aria-hidden", "false");
         }
         
         const $mediaCards = document.querySelectorAll('.expo_section article')
@@ -108,6 +115,20 @@ class PhotographerPage extends Page {
             ++i
             const prevButton = $mySlides[i-1].querySelector('.prev')
             const nextButton = $mySlides[i-1].querySelector('.next')
+            const likeNumber = $mediaCard.querySelector('.like')
+            const likeTotal = document.querySelector('.likeTotal')
+
+            likeNumber.addEventListener('click', ((index) => {
+                return () => {
+                    if (!likeNumber.classList.contains('liked')) {
+                        likeNumber.textContent = parseInt(likeNumber.textContent) + 1
+                        likeNumber.classList.add('liked')
+                        likeTotal.textContent = parseInt(likeTotal.textContent) + 1
+                        this.totalLikes += 1
+                    }
+                    
+                }
+            })(i))
 
             prevButton.addEventListener('click', ((index) => {
                 return () => {
@@ -133,6 +154,7 @@ class PhotographerPage extends Page {
                 return () => {
                     currentSlide(index)
                     lightbox.style.display = 'block'
+                    lightbox.setAttribute("aria-hidden", "false");
                     history.pushState({}, '', `?id=${this.photographerId}&media=${index}&sortBy=${this.sortBy}`)
                     this.displaiedMedia = index
                 }
@@ -147,6 +169,7 @@ class PhotographerPage extends Page {
             const $closeBtn = document.querySelector('.modal img')
             $closeBtn.addEventListener('click', () => {
                 modal.style.display = 'none'
+                modal.setAttribute("aria-hidden", "true");
             })
         })
     }

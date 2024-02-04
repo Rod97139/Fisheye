@@ -2,10 +2,13 @@ export const displayLightbox = () => {
     const lightbox = document.querySelector('#myLightbox')
     if (lightbox) {
       lightbox.style.display = 'block'
+      lightbox.setAttribute("aria-hidden", "false");
       return lightbox
     }
     const newLightbox = document.createElement("div");
     newLightbox.id = "myLightbox";
+    newLightbox.setAttribute("role", "dialog");
+    newLightbox.setAttribute("aria-hidden", "true");
     const lightboxContent = document.createElement("div");
     lightboxContent.classList.add("lightbox-content");
     newLightbox.appendChild(lightboxContent);
