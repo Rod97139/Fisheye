@@ -7,7 +7,7 @@ class MediaFactory {
                 // console.log(expoImageTemplate(data, photographer));
                 // Si le type correspond à l'ancienne API, alors retourne-moi l'ancien formatage
                 if (data.image) {
-                const { title, file, bigFile } = data;
+                const { title, file, bigFile, likes } = data;
 
                 const myArray = photographer.name.split(" ");
                 const firstName = myArray[0];
@@ -22,9 +22,15 @@ class MediaFactory {
                         img.classList.add('expo_img')
                         const pictureTitle = document.createElement( 'h2' );
                         pictureTitle.textContent = title;
+                        const $like = document.createElement('p');
+                        $like.classList.add('like');
+                        $like.textContent = likes;
+
+
                         btn.appendChild(img);
                         article.appendChild(btn);
                         article.appendChild(pictureTitle);
+                        article.appendChild($like);
                 
                         return (article);
                 }
@@ -51,7 +57,7 @@ class MediaFactory {
                 return { title, picture, getExpoCardDOM, getLightboxDOM }
                 // Sinon retourne-moi le nouveau formatage
                 } else if (data.video) {
-                        const { title, file } = data;
+                        const { title, file, likes } = data;
 
                         const myArray = photographer.name.split(" ");
                         const firstName = myArray[0];
@@ -66,9 +72,13 @@ class MediaFactory {
                                 video.classList.add('expo_video')
                                 const pictureTitle = document.createElement( 'h2' );
                                 pictureTitle.textContent = title;
+                                const $like = document.createElement('p');
+                                $like.classList.add('like');
+                                $like.textContent = likes;
                                 btn.appendChild(video);
                                 article.appendChild(btn);
                                 article.appendChild(pictureTitle);
+                                article.appendChild($like);
                         
                                 return (article);
                         }

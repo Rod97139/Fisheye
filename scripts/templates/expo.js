@@ -41,7 +41,7 @@ export const expoImageTemplate = (data, photographer) => {
 //     return { title, picture, getExpoCardDOM }
 // }
 
-export const expoPhotographerTemplate = (data) => {
+export const expoPhotographerTemplate = (App, data) => {
     const { name, portrait } = data;
 
     const picture = `assets/photographers/${portrait}`;
@@ -56,6 +56,12 @@ export const expoPhotographerTemplate = (data) => {
         tagline.textContent = data.tagline;
         const price = document.createElement( 'p' );
         price.textContent = `${data.price}€/jour`;
+        const totalLikes = document.createElement( 'p' );
+        totalLikes.classList.add('likeTotal');
+        totalLikes.textContent = App.totalLikes;
+        article.appendChild(totalLikes);
+
+
         article.appendChild(photographerName);
         article.appendChild(location);
         article.appendChild(tagline);

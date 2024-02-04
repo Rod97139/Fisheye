@@ -16,6 +16,18 @@ export const photographerTemplate = (data) => {
         link.appendChild(img);
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
+        const info = document.createElement( 'div' );
+        info.classList.add('info');
+        const location = document.createElement( 'p' );
+        location.textContent = `${data.city}, ${data.country}`;
+        const tagline = document.createElement( 'p' );
+        tagline.textContent = data.tagline;
+        const price = document.createElement( 'p' );
+        price.textContent = `${data.price}€/jour`;
+        info.appendChild(location);
+        info.appendChild(tagline);
+        info.appendChild(price);
+        article.appendChild(info);
         article.appendChild(link);
         article.appendChild(h2);
         return (article);
