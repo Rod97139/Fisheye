@@ -1,13 +1,10 @@
 import Media from "../models/Media.js";
-import { 
-    // expoImageTemplate,
-     expoPhotographerTemplate, expoSorterTemplate } from "../templates/expo.js";
+import { expoPhotographerTemplate, expoSorterTemplate } from "../templates/expo.js";
 import Page from "./Page.js";
 import { displayModal } from "../utils/contactForm.js";
 import { currentSlide, displayLightbox } from "../utils/lightbox.js";
 import MediaFactory from "../factory/mediaFactory.js";
 import { sortBy } from "../utils/sorter.js";
-// import MediaFactory from "../factory/mediaFactory.js";
 
 
 
@@ -20,7 +17,8 @@ class PhotographerPage extends Page {
         this.photographers = photographers
         this.$expoWrapper = document.querySelector('.expo_section')
         this.medias = []
-        this.displaiedMedia = null 
+        this.displaiedMedia = null
+        this.sortBy = 'likes'
     }
 
     async getPhotographer() {
@@ -36,30 +34,33 @@ class PhotographerPage extends Page {
     }
 
     async displayExpo (medias, photographer) {
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+        if (urlParams.get('sortBy')) {
+            this.sortBy = urlParams.get('sortBy').toString()
+        }
+
         const $expoSorter = document.querySelector('.expo-sorter')
-        $expoSorter.appendChild(expoSorterTemplate())
-        const select = document.querySelector('#sorter')
-        select.addEventListener('change', (e) => {
 
-            console.log(this.medias, 'this.medias');
+        if ($expoSorter.textContent == '') {
+            $expoSorter.appendChild(expoSorterTemplate(this))
+            const select = document.querySelector('#sorter')
+            sortBy(this.medias, this.sortBy)
+            select.addEventListener('change', (e) => {
+                sortBy(this.medias, e.target.value)
+                this.sortBy = e.target.value
+                history.pushState({}, '', `?id=${this.photographerId}&sortBy=${this.sortBy}`)
+                
+                const $expoLightBox = document.querySelector('#myLightbox')
+                $expoLightBox.remove()
+                this.$expoWrapper.textContent = ''
 
-            sortBy(this.medias, e.target.value)
-
-            // console.log(e.target.value)
-            // console.log(this.medias);
-            
-            const $expoLightBox = document.querySelector('#myLightbox')
-            $expoLightBox.remove()
-            select.remove()
-            this.$expoWrapper.textContent = ''
-
-            const $newWrapper = document.createElement('div')
-            $newWrapper.classList.add('expo_section')
-            document.querySelector('main').appendChild($newWrapper)
-
-            this.displayExpo(this.medias, photographer)
-            this.handleLightbox()
-        })
+                this.displayExpo(this.medias, photographer)
+                this.handleLightbox()
+            })
+        }
+        
         displayLightbox()
         const lightboxContent = document.querySelector('.lightbox-content')
         
@@ -113,7 +114,7 @@ class PhotographerPage extends Page {
                     let slideIndex = parseInt(index) - 1;
                     currentSlide(slideIndex)
                     if (slideIndex < 1) {slideIndex = $mediaCards.length}
-                    history.pushState({}, '', `?id=${this.photographerId}&media=${slideIndex}`)
+                    history.pushState({}, '', `?id=${this.photographerId}&media=${slideIndex}&sortBy=${this.sortBy}`)
                     this.displaiedMedia = slideIndex
                 }
             })(i))
@@ -123,7 +124,7 @@ class PhotographerPage extends Page {
                     let slideIndex = parseInt(index) + 1;
                     currentSlide(slideIndex)
                     if (slideIndex > $mediaCards.length) {slideIndex = 1}
-                    history.pushState({}, '', `?id=${this.photographerId}&media=${slideIndex}`)
+                    history.pushState({}, '', `?id=${this.photographerId}&media=${slideIndex}&sortBy=${this.sortBy}`)
                     this.displaiedMedia = slideIndex
                 }
             })(i))
@@ -132,7 +133,7 @@ class PhotographerPage extends Page {
                 return () => {
                     currentSlide(index)
                     lightbox.style.display = 'block'
-                    history.pushState({}, '', `?id=${this.photographerId}&media=${index}`)
+                    history.pushState({}, '', `?id=${this.photographerId}&media=${index}&sortBy=${this.sortBy}`)
                     this.displaiedMedia = index
                 }
             })(i)) // closure pour regler probleme de scope/portée
