@@ -33,14 +33,23 @@ export const showSlides = (n) => {
     if (n < 1) {slideIndex = slides.length}
     for (i = 0; i < slides.length; i++) {
       slides[i].style.display = "none";
+      slides[i].setAttribute("aria-hidden", "true");
     }
     slides[slideIndex-1].style.display = "block";
+    slides[slideIndex-1].setAttribute("aria-hidden", "false");
     const video = slides[slideIndex-1].querySelector('video')
     video?.play()
   }
 
 export const currentSlide = (n) => {
     showSlides(n);
+}
+
+export const closeLightbox = () => {
+
+    const lightbox = document.querySelector('#myLightbox')
+    lightbox.style.display = 'none'
+    lightbox.setAttribute("aria-hidden", "true");
 }
 
 export const accessibilityEvents = (App) => {
@@ -63,6 +72,14 @@ export const accessibilityEvents = (App) => {
             history.pushState({}, '', `?id=${App.page.photographerId}&media=${slideIndex}&sortBy=${App.page.sortBy}`)
             App.page.displaiedMedia = slideIndex
             console.log('Touche de la flèche gauche appuyée', slideIndex);
+        }
+    })
+    document.addEventListener('keydown', (event) => {
+        if ((event.key === 'Escape') && (App.page.displaiedMedia !== null)) {
+            history.pushState({}, '', `?id=${App.page.photographerId}&sortBy=${App.page.sortBy}`)
+            App.page.displaiedMedia = null
+            closeLightbox()
+            console.log('Touche Echap appuyée', slideIndex);
         }
     })
     App.accessibilityEventsEnabled = true;

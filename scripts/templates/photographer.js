@@ -21,17 +21,18 @@ export const photographerTemplate = (data) => {
         const info = document.createElement( 'div' );
         info.classList.add('info');
         info.setAttribute("role", "info");
+        info.setAttribute("aria-label", "informations sur le photographe");
         const location = document.createElement( 'p' );
         location.textContent = `${data.city}, ${data.country}`;
         const tagline = document.createElement( 'p' );
         tagline.textContent = data.tagline;
         const price = document.createElement( 'p' );
         price.textContent = `${data.price}€/jour`;
+        info.appendChild(h2);
         info.appendChild(location);
         info.appendChild(tagline);
         info.appendChild(price);
         article.appendChild(link);
-        article.appendChild(h2);
         article.appendChild(info);
         return (article);
     }
