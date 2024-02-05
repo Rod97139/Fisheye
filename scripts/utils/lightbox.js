@@ -79,7 +79,7 @@ export const accessibilityEvents = (App) => {
             history.pushState({}, '', `?id=${App.page.photographerId}&sortBy=${App.page.sortBy}`)
             App.page.displaiedMedia = null
             closeLightbox()
-            console.log('Touche Echap appuyée', slideIndex);
+            console.log('Touche Echap appuyée');
         }
     })
     App.accessibilityEventsEnabled = true;
