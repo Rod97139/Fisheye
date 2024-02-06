@@ -55,10 +55,6 @@ form input {
     border-radius: 5px;
 }
 
-.expo_wrapper  img {
-    height: 200px;
-    width: 200px;
-}
 
 #myLightbox {
     margin-top: 500px;
@@ -78,26 +74,6 @@ form input {
     }
 }
 
-.expo_wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin-top: 100px;
-    article {
-            color: black;
-            text-decoration: none;
-            .expo_img {    
-                cursor: pointer;
-                object-fit: cover;
-            }
-            .expo_video {
-                cursor: pointer;
-                object-fit: cover;
-                height: 200px;
-                width: 200px;
-            }
-    }
-}
 
 .photograph-header {
     background-color: #FAFAFA;
@@ -147,5 +123,62 @@ form input {
             object-fit: cover;
         
         }
+    }
+}
+
+.expo_section {
+    .expo_sorter {
+        display: flex;
+        flex-direction: row;
+        margin-inline: 100px;
+        margin-block: 50px;
+
+        &_tag {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 25px;
+        }
+
+        &_select {
+            width: 120px;
+
+        }
+    }
+    .expo_wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 70px;
+        margin-top: 100px;
+        margin-inline: 120px;
+        &_card {
+            color: black;
+            text-decoration: none;
+            width: 350px;
+            &_btn {
+                padding: 0;
+                &_img {
+                    cursor: pointer;
+                    object-fit: cover;
+                    height: 300px;
+                    width: 350px;
+                }
+            }
+            &_info {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                color: #901C1C;
+                &_title {
+                    font-size: 24px;
+                    font-weight: lighter;
+
+                }
+                &_like {
+
+                }
+                
+            }
+        }
+
     }
 }

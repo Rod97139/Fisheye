@@ -89,14 +89,18 @@ export const expoSorterTemplate = (Page) => {
     for (const option of options) {
         const optionDOM = document.createElement( 'option' );
         optionDOM.value = option;
-        optionDOM.textContent = option;
+        if (option === 'likes') {
+            optionDOM.textContent = 'Popularité';
+            
+        } else if (option === 'date') {
+            optionDOM.textContent = 'Date';
+        } else {
+            optionDOM.textContent = 'Titre';
+        }
         select.appendChild(optionDOM);
         if (option === Page.sortBy) {
             optionDOM.setAttribute('selected', true);
         }
-        // optionDOM.addEventListener('click', (e) => {
-        //     // sortBy(this.medias, e.target.value)
-        // })
     }
     return select;
 }   

@@ -52,11 +52,6 @@ form input {
   border-radius: 5px;
 }
 
-.expo_wrapper img {
-  height: 200px;
-  width: 200px;
-}
-
 #myLightbox {
   margin-top: 500px;
   position: absolute;
@@ -69,27 +64,6 @@ form input {
   margin-inline: auto;
   text-align: center;
   width: 50%;
-}
-
-.expo_wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 70px;
-  margin-top: 100px;
-}
-.expo_wrapper article {
-  color: black;
-  text-decoration: none;
-}
-.expo_wrapper article .expo_img {
-  cursor: pointer;
-  object-fit: cover;
-}
-.expo_wrapper article .expo_video {
-  cursor: pointer;
-  object-fit: cover;
-  height: 200px;
-  width: 200px;
 }
 
 .photograph-header {
@@ -131,6 +105,52 @@ form input {
   width: 200px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.expo_section .expo_sorter {
+  display: flex;
+  flex-direction: row;
+  margin-inline: 100px;
+  margin-block: 50px;
+}
+.expo_section .expo_sorter_tag {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 25px;
+}
+.expo_section .expo_sorter_select {
+  width: 120px;
+}
+.expo_section .expo_wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 70px;
+  margin-top: 100px;
+  margin-inline: 120px;
+}
+.expo_section .expo_wrapper_card {
+  color: black;
+  text-decoration: none;
+  width: 350px;
+}
+.expo_section .expo_wrapper_card_btn {
+  padding: 0;
+}
+.expo_section .expo_wrapper_card_btn_img {
+  cursor: pointer;
+  object-fit: cover;
+  height: 300px;
+  width: 350px;
+}
+.expo_section .expo_wrapper_card_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #901C1C;
+}
+.expo_section .expo_wrapper_card_info_title {
+  font-size: 24px;
+  font-weight: lighter;
 }
 
 /*# sourceMappingURL=photographer.css.map */

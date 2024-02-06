@@ -43,10 +43,17 @@ class PhotographerPage extends Page {
         }
 
         const $expoSorter = document.querySelector('.expo_sorter')
+        
 
         if ($expoSorter.textContent == '') {
+            const sorterTag = document.createElement('p')
+            sorterTag.textContent = 'Trier par'
+            sorterTag.classList.add('expo_sorter_tag')
+            $expoSorter.appendChild(sorterTag)
+            console.log($expoSorter.textContent);
             $expoSorter.appendChild(expoSorterTemplate(this))
             const select = document.querySelector('#sorter')
+            select.classList.add('expo_sorter_select')
             sortBy(this.medias, this.sortBy)
             select.addEventListener('change', (e) => {
                 sortBy(this.medias, e.target.value)

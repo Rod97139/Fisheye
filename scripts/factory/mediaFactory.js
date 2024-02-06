@@ -15,23 +15,32 @@ class MediaFactory {
                 
                 const getExpoCardDOM = () => {
                         const article = document.createElement( 'article' );
+                        article.classList.add('expo_wrapper_card');
                         const btn = document.createElement( 'button' );
+                        btn.classList.add('expo_wrapper_card_btn');
                         const img = document.createElement( 'img' );
+                        img.classList.add('expo_wrapper_card_btn_img');
                         img.setAttribute("src", picture)
                         img.setAttribute("alt", title)
                         
                         img.classList.add('expo_img')
                         const pictureTitle = document.createElement( 'h2' );
+                        pictureTitle.classList.add('expo_wrapper_card_info_title');
                         pictureTitle.textContent = title;
                         const $like = document.createElement('p');
+                        $like.classList.add('expo_wrapper_card_info_like');
                         $like.classList.add('like');
                         $like.textContent = likes;
 
 
                         btn.appendChild(img);
                         article.appendChild(btn);
-                        article.appendChild(pictureTitle);
-                        article.appendChild($like);
+                        const infoMedia = document.createElement('div');
+                        infoMedia.classList.add('expo_wrapper_card_info');
+                        infoMedia.appendChild(pictureTitle);
+                        infoMedia.appendChild($like);
+                        article.appendChild(infoMedia);
+                        
                 
                         return (article);
                 }
@@ -67,20 +76,29 @@ class MediaFactory {
                         
                         const getExpoCardDOM = () => {
                                 const article = document.createElement( 'article' );
+                                article.classList.add('expo_wrapper_card');
                                 const btn = document.createElement( 'button' );
+                                btn.classList.add('expo_wrapper_card_btn');
+
                                 const video = document.createElement( 'video' );
+                                video.classList.add('expo_wrapper_card_btn_img');
                                 video.setAttribute("src", picture)
                                 video.setAttribute("alt", title)
                                 video.classList.add('expo_video')
                                 const pictureTitle = document.createElement( 'h2' );
                                 pictureTitle.textContent = title;
+                                pictureTitle.classList.add('expo_wrapper_card_info_title');
                                 const $like = document.createElement('p');
                                 $like.classList.add('like');
                                 $like.textContent = likes;
+                                $like.classList.add('expo_wrapper_card_info_like');
                                 btn.appendChild(video);
                                 article.appendChild(btn);
-                                article.appendChild(pictureTitle);
-                                article.appendChild($like);
+                                const infoMedia = document.createElement('div');
+                                infoMedia.classList.add('expo_wrapper_card_info');
+                                infoMedia.appendChild(pictureTitle);
+                                infoMedia.appendChild($like);
+                                article.appendChild(infoMedia);
                         
                                 return (article);
                         }
