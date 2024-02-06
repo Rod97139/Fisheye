@@ -55,26 +55,6 @@ form input {
     border-radius: 5px;
 }
 
-
-#myLightbox {
-    margin-top: 500px;
-    position: absolute;
-    background-color: #312E2E;
-    top: 0;
-    
-    .mySlides {
-        img {
-            display: flex;
-            height: 50%;
-            margin-inline: auto;
-            // margin-block: auto;
-            text-align: center;
-            width: 50%;
-        }
-    }
-}
-
-
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
@@ -176,7 +156,35 @@ form input {
                 &_like {
 
                 }
-                
+            }
+        }
+    }
+}
+
+
+#myLightbox {
+    position: fixed;
+    top: 10px;
+    left: 0;
+    right: 0;
+    .lightbox-content {
+        height: 100%;
+        margin: 0;
+        .mySlides {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 100%;
+                max-height: 900px;
+                object-fit: contain;
+            }
+            video {
+                width: 100%;
+                max-height: 900px;
+                object-fit: contain;
             }
         }
 
