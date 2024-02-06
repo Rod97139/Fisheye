@@ -1,21 +1,5 @@
-.photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
-}
 
-.contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
-}
+
 
 .modal {
     border-radius: 5px;
@@ -71,46 +55,138 @@ form input {
     border-radius: 5px;
 }
 
-.expo_section  img {
-    height: 200px;
-    width: 200px;
-}
-
-#myLightbox {
-    margin-top: 500px;
-    position: absolute;
-    background-color: #312E2E;
-    top: 0;
+.photograph-header {
+    background-color: #FAFAFA;
+    height: 300px;
+    margin: 0 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    .photographer {
+        &_info {
+            &_name {
+                color: #D3573C;
+                font-size: 64px;
     
-    .mySlides {
-        img {
-            display: flex;
-            height: 50%;
-            margin-inline: auto;
-            // margin-block: auto;
-            text-align: center;
-            width: 50%;
+    
+            }
+            &_location {
+                color: #901C1C;
+                font-size: 24px;
+    
+    
+            }
+            &_tagline {
+                color: #525252;
+                font-size: 18px;
+    
+            }
+        }
+        &_contact {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            padding: 11px;
+            width: 170px;
+            height: 70px;
+            border: none;
+            background-color: #901C1C;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        &_picture {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        
         }
     }
 }
 
 .expo_section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin-top: 100px;
-    article {
+    .expo_sorter {
+        display: flex;
+        flex-direction: row;
+        margin-inline: 100px;
+        margin-block: 50px;
+
+        &_tag {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 25px;
+        }
+
+        &_select {
+            width: 120px;
+
+        }
+    }
+    .expo_wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 70px;
+        margin-top: 100px;
+        margin-inline: 120px;
+        &_card {
             color: black;
             text-decoration: none;
-            .expo_img {    
-                cursor: pointer;
-                object-fit: cover;
+            width: 350px;
+            &_btn {
+                padding: 0;
+                &_img {
+                    cursor: pointer;
+                    object-fit: cover;
+                    height: 300px;
+                    width: 350px;
+                }
             }
-            .expo_video {
-                cursor: pointer;
-                object-fit: cover;
-                height: 200px;
-                width: 200px;
+            &_info {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                color: #901C1C;
+                &_title {
+                    font-size: 24px;
+                    font-weight: lighter;
+
+                }
+                &_like {
+
+                }
             }
+        }
+    }
+}
+
+
+#myLightbox {
+    position: fixed;
+    top: 10px;
+    left: 0;
+    right: 0;
+    .lightbox-content {
+        height: 100%;
+        margin: 0;
+        .mySlides {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 100%;
+                max-height: 900px;
+                object-fit: contain;
+            }
+            video {
+                width: 100%;
+                max-height: 900px;
+                object-fit: contain;
+            }
+        }
+
     }
 }
