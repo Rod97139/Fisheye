@@ -139,6 +139,7 @@ form input {
   font-weight: lighter;
 }
 #myLightbox {
+  filter: blur(0);
   position: fixed;
   top: 10px;
   left: 0;
@@ -164,6 +165,10 @@ form input {
   width: 100%;
   max-height: 900px;
   object-fit: contain;
+}
+
+.blur {
+  filter: blur(1.5rem);
 }
 
 /*# sourceMappingURL=photographer.css.map */

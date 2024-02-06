@@ -43,6 +43,14 @@ export const showSlides = (n) => {
 
 export const currentSlide = (n) => {
     showSlides(n);
+    const DomToHide = document.querySelectorAll('main section')
+    const header = document.querySelector('header')
+    header.setAttribute("aria-hidden", "true");
+    header.classList.add('blur')
+    DomToHide.forEach((element) => {
+        element.setAttribute("aria-hidden", "true");
+        element.classList.add('blur')
+    })
 }
 
 export const closeLightbox = () => {
@@ -50,6 +58,11 @@ export const closeLightbox = () => {
     const lightbox = document.querySelector('#myLightbox')
     lightbox.style.display = 'none'
     lightbox.setAttribute("aria-hidden", "true");
+    const DomToShow = document.querySelectorAll('.blur')
+    DomToShow.forEach((element) => {
+        element.setAttribute("aria-hidden", "false");
+        element.classList.remove('blur')
+    })
 }
 
 export const accessibilityEvents = (App) => {

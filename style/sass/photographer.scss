@@ -125,6 +125,7 @@ form input {
         }
     }
     .expo_wrapper {
+        
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 70px;
@@ -163,10 +164,15 @@ form input {
 
 
 #myLightbox {
+    filter: blur(0);
     position: fixed;
     top: 10px;
     left: 0;
     right: 0;
+    
+    // background-color: #312E2E;
+    // box-shadow: #312E2E 0px 0px 10px 10px;
+    
     .lightbox-content {
         height: 100%;
         margin: 0;
@@ -187,6 +193,9 @@ form input {
                 object-fit: contain;
             }
         }
-
     }
+}
+
+.blur {
+    filter: blur(1.5rem);
 }
