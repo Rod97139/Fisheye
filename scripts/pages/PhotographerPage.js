@@ -15,7 +15,7 @@ class PhotographerPage extends Page {
         super(App)
         this.photographerId = id;
         this.photographers = photographers
-        this.$expoWrapper = document.querySelector('.expo_section')
+        this.$expoWrapper = document.querySelector('.expo_wrapper')
         this.medias = []
         this.displaiedMedia = null
         this.sortBy = 'likes'
@@ -42,7 +42,7 @@ class PhotographerPage extends Page {
             this.sortBy = urlParams.get('sortBy').toString()
         }
 
-        const $expoSorter = document.querySelector('.expo-sorter')
+        const $expoSorter = document.querySelector('.expo_sorter')
 
         if ($expoSorter.textContent == '') {
             $expoSorter.appendChild(expoSorterTemplate(this))
@@ -88,8 +88,19 @@ class PhotographerPage extends Page {
         const photographerModel = expoPhotographerTemplate(this, photographer);
         const expoPhotographerCardDOM = photographerModel.getExpoPhotographerCardDOM();
         const $expoPhotographerWrapper = document.querySelector('.photograph-header')
-
+        const $btn = document.createElement('button')
+        $btn.classList.add('contact_button')
+        $btn.classList.add('photographer_contact')
+        $btn.textContent = 'Contactez-moi'
+        const $photographerPicture = document.createElement('img')
+        $photographerPicture.src = `assets/photographers/${photographer.portrait}`
+        $photographerPicture.alt = `Portrait de ${photographer.name}`
+        $photographerPicture.classList.add('photographer_picture')
+        
         $expoPhotographerWrapper.appendChild(expoPhotographerCardDOM);
+        $expoPhotographerWrapper.appendChild($btn)
+        $expoPhotographerWrapper.appendChild($photographerPicture)
+
     }
 
     async removeNavNosPhotographe() {
@@ -108,7 +119,7 @@ class PhotographerPage extends Page {
             lightbox.setAttribute("aria-hidden", "false");
         }
         
-        const $mediaCards = document.querySelectorAll('.expo_section article')
+        const $mediaCards = document.querySelectorAll('.expo_wrapper article')
         let i = 0
         const $mySlides = document.querySelectorAll('.mySlides')
         for (const $mediaCard of $mediaCards) {
