@@ -61,6 +61,10 @@ class MediaFactory {
                         next.classList.add('next');
                         next.textContent = 'next';
                         mySlides.appendChild(next);
+                        const close = document.createElement( 'a' );
+                        close.classList.add('close');
+                        close.textContent = 'close';
+                        mySlides.appendChild(close);
 
                         return (mySlides);
                 }
@@ -121,6 +125,10 @@ class MediaFactory {
                                 next.classList.add('next');
                                 next.textContent = 'next';
                                 mySlides.appendChild(next);
+                                const close = document.createElement( 'a' );
+                                close.classList.add('close');
+                                close.textContent = 'close';
+                                mySlides.appendChild(close);
         
                                 return (mySlides);
                         }

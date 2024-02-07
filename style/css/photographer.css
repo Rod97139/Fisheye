@@ -166,9 +166,66 @@ form input {
   max-height: 900px;
   object-fit: contain;
 }
+#myLightbox .lightbox-content .mySlides .prev {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  cursor: pointer;
+  color: transparent;
+}
+#myLightbox .lightbox-content .mySlides .prev::before {
+  content: url(../../assets/icons/left-icon.svg);
+}
+#myLightbox .lightbox-content .mySlides .next {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  cursor: pointer;
+  color: transparent;
+}
+#myLightbox .lightbox-content .mySlides .next::before {
+  content: url(../../assets/icons/right-icon.svg);
+}
+#myLightbox .lightbox-content .mySlides .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  color: transparent;
+}
+#myLightbox .lightbox-content .mySlides .close::before {
+  content: url(../../assets/icons/close2.svg);
+}
 
 .blur {
   filter: blur(1.5rem);
+}
+.blur.fixed-likes-price {
+  display: none;
+}
+
+.fixed-likes-price {
+  position: fixed;
+  bottom: 0;
+  right: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #DB8876;
+  border-radius: 5px 5px 0 0;
+  color: black;
+  font-size: 24px;
+  font-weight: lighter;
+}
+.fixed-likes-price .likeTotal {
+  margin-inline: 20px;
+  margin-block: 0;
+}
+.fixed-likes-price .photographer_info_price {
+  margin-inline: 20px;
+  margin-block: 0;
 }
 
 /*# sourceMappingURL=photographer.css.map */
