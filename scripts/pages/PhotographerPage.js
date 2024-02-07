@@ -2,7 +2,7 @@ import Media from "../models/Media.js";
 import { expoPhotographerTemplate, expoSorterTemplate } from "../templates/expo.js";
 import Page from "./Page.js";
 import { displayModal } from "../utils/contactForm.js";
-import { currentSlide, displayLightbox } from "../utils/lightbox.js";
+import { closeLightbox, currentSlide, displayLightbox } from "../utils/lightbox.js";
 import MediaFactory from "../factory/mediaFactory.js";
 import { sortBy } from "../utils/sorter.js";
 
@@ -133,6 +133,7 @@ class PhotographerPage extends Page {
             ++i
             const prevButton = $mySlides[i-1].querySelector('.prev')
             const nextButton = $mySlides[i-1].querySelector('.next')
+            const closeBtn = $mySlides[i-1].querySelector('.close')
             const likeNumber = $mediaCard.querySelector('.like')
             const likeTotal = document.querySelector('.likeTotal')
 
@@ -145,6 +146,14 @@ class PhotographerPage extends Page {
                         this.totalLikes += 1
                     }
                     
+                }
+            })(i))
+
+            closeBtn.addEventListener('click', ((index) => {
+                return () => {
+                    history.pushState({}, '', `?id=${this.photographerId}&sortBy=${this.sortBy}`)
+                    this.displaiedMedia = null
+                    closeLightbox()
                 }
             })(i))
 

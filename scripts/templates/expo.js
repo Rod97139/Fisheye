@@ -66,7 +66,7 @@ export const expoPhotographerTemplate = (App, data) => {
         totalLikes.classList.add('likeTotal');
         totalLikes.textContent = App.totalLikes;
         const likesSection = document.createElement( 'section' );
-        likesSection.classList.add('likes');
+        likesSection.classList.add('fixed-likes-price');
         likesSection.appendChild(totalLikes);
         likesSection.appendChild(price);
         const main = document.querySelector('main');
