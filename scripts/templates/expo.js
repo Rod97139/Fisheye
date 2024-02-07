@@ -104,3 +104,61 @@ export const expoSorterTemplate = (Page) => {
     }
     return select;
 }   
+
+export const expoCustomSelectTemplate = (App) => {
+    const options = ['likes', 'date', 'title'];
+    const inexOfSlected = options.indexOf(App.sortBy);
+    let indexOfFirst;
+    let indexOfSecond;
+    if (inexOfSlected === 0) {
+        indexOfFirst = 1;
+        indexOfSecond = 2;
+    } else if (inexOfSlected === 1) {
+        indexOfFirst = 0;
+        indexOfSecond = 2;
+    } else {
+        indexOfFirst = 0;
+        indexOfSecond = 1;
+    }
+    const optionsFr = ['Popularité', 'Date', 'Titre'];
+    inexOfSlected > -1 ? options.splice(inexOfSlected, 1) : false;
+    const newSelect = document.createElement( 'div' );
+    newSelect.classList.add('custom-select');
+    const selected = document.createElement( 'button' );
+    selected.classList.add('custom-select-selected');
+
+    selected.textContent = optionsFr[inexOfSlected];
+    
+    inexOfSlected > -1 ? optionsFr.splice(inexOfSlected, 1) : false;
+    newSelect.appendChild(selected);
+    const optionsDiv = document.createElement( 'div' );
+    optionsDiv.classList.add('custom-select-options');
+    selected.addEventListener('click', () => {
+        optionsDiv.style.display = optionsDiv.style.display === 'block' ? 'none' : 'block';
+    })
+    const firstOption = document.createElement( 'button' );
+    
+    firstOption.classList.add('custom-select-options-first');
+    firstOption.textContent = optionsFr[0];
+    firstOption.addEventListener('click', () => {
+        selectChangeEvent(indexOfFirst);
+    })
+    const secondOption = document.createElement( 'button' );
+    secondOption.classList.add('custom-select-options-second');
+    secondOption.textContent = optionsFr[1];
+    secondOption.addEventListener('click', () => {
+        selectChangeEvent(indexOfSecond);
+    })
+    optionsDiv.appendChild(firstOption);
+    optionsDiv.appendChild(secondOption);
+    newSelect.appendChild(optionsDiv);
+
+    return newSelect;
+
+}
+
+export const selectChangeEvent = (index) => {
+    const select = document.querySelector('#sorter');
+    select.selectedIndex = index;
+    select.dispatchEvent(new Event('change'));
+}

@@ -116,18 +116,108 @@ form input {
         &_tag {
             font-size: 18px;
             font-weight: bold;
-            margin-right: 25px;
+            width: 150px;
         }
 
         &_select {
-            width: 120px;
-
+            display: none;
+        }
+        .custom-select {
+            position: absolute;
+            top: 542px;
+            left: 200px;
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            &-selected {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                font-size: 20px;
+                font-weight: bold;
+                color: white;
+                padding: 19px;
+                width: 170px;
+                margin: auto;
+                border: none;
+                background-color: #901C1C;
+                border-radius: 5px;
+                cursor: pointer;
+                &::after {
+                    content: url(../../assets/icons/down-arrow.svg);
+                    margin-left: 20px;
+                }
+            }
+            &-options {
+                display: none;
+                position: absolute;
+                top: 58px;
+                left: 15px;
+                // background-color: #901C1C;
+                // padding: 10px;
+                // padding-inline: 19px;
+                // width: 120px;
+                // position: absolute;
+                // top: 50px;
+                // font-size: 20px;
+                // font-weight: bold;
+                // color: white;
+                // border-radius: 5px;
+                &-first {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: white;
+                    padding: 19px;
+                    width: 170px;
+                    margin: auto;
+                    border: none;
+                    background-color: #901C1C;
+                    
+                    cursor: pointer;
+                    &::before{
+                        content: "";
+                        border-top: white 2px solid;
+                        display: block;
+                        width: 150px;
+                        position: absolute;
+                        top: 0;
+                        left: 11px;
+                    }
+                    &::after {
+                        content: "";
+                        border-top: white 2px solid;
+                        display: block;
+                        width: 150px;
+                        position: absolute;
+                        top: 63px;
+                        left: 11px;
+                    }
+                }
+                &-second {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: white;
+                    padding: 19px;
+                    width: 170px;
+                    margin: auto;
+                    border: none;
+                    background-color: #901C1C;
+                    border-radius: 0 0 5px 5px;
+                    cursor: pointer;
+                }
+            }
         }
     }
     .expo_wrapper {
         
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 70px;
         margin-top: 100px;
         margin-inline: 120px;
@@ -136,7 +226,12 @@ form input {
             text-decoration: none;
             width: 350px;
             &_btn {
+                border-radius: 15px;
                 padding: 0;
+                border: none;
+                overflow: hidden;
+                
+                
                 &_img {
                     cursor: pointer;
                     object-fit: cover;
@@ -254,3 +349,13 @@ form input {
         margin-block: 0;
     }
 }
+
+
+
+/** CUSTOM SELECT */
+
+  
+  .expo_sorter select {
+    display: none; /*hide original SELECT element:*/
+  }
+  

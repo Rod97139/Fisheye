@@ -1,5 +1,5 @@
 import Media from "../models/Media.js";
-import { expoPhotographerTemplate, expoSorterTemplate } from "../templates/expo.js";
+import { expoCustomSelectTemplate, expoPhotographerTemplate, expoSorterTemplate } from "../templates/expo.js";
 import Page from "./Page.js";
 import { displayModal } from "../utils/contactForm.js";
 import { closeLightbox, currentSlide, displayLightbox } from "../utils/lightbox.js";
@@ -43,6 +43,7 @@ class PhotographerPage extends Page {
         }
 
         const $expoSorter = document.querySelector('.expo_sorter')
+        $expoSorter.style.width = '200px'
         
 
         if ($expoSorter.textContent == '') {
@@ -55,12 +56,15 @@ class PhotographerPage extends Page {
             const select = document.querySelector('#sorter')
             select.classList.add('expo_sorter_select')
             sortBy(this.medias, this.sortBy)
+            
             select.addEventListener('change', (e) => {
                 sortBy(this.medias, e.target.value)
                 this.sortBy = e.target.value
                 history.pushState({}, '', `?id=${this.photographerId}&sortBy=${this.sortBy}`)
                 
                 const $expoLightBox = document.querySelector('#myLightbox')
+                const $customSelect = document.querySelector('.custom-select')
+                $customSelect.remove()
                 $expoLightBox.remove()
                 this.$expoWrapper.textContent = ''
 
@@ -69,6 +73,7 @@ class PhotographerPage extends Page {
             })
         }
         
+        $expoSorter.appendChild(expoCustomSelectTemplate(this))
         displayLightbox()
         const lightboxContent = document.querySelector('.lightbox-content')
         
