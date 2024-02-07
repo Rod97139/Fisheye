@@ -3,4 +3,3 @@ export const sortBy = (arrayOfObjects, prop) => {
         return a[prop] > b[prop] ? 1 : -1;
     });
     }
-    

@@ -102,14 +102,77 @@ form input {
 .expo_section .expo_sorter_tag {
   font-size: 18px;
   font-weight: bold;
-  margin-right: 25px;
+  width: 150px;
 }
 .expo_section .expo_sorter_select {
-  width: 120px;
+  display: none;
+}
+.expo_section .expo_sorter .custom-select {
+  position: absolute;
+  top: 542px;
+  left: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+.expo_section .expo_sorter .custom-select-selected {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 19px;
+  width: 170px;
+  margin: auto;
+  border: none;
+  background-color: #901C1C;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.expo_section .expo_sorter .custom-select-selected::after {
+  content: url(../../assets/icons/down-arrow.svg);
+  margin-left: 20px;
+}
+.expo_section .expo_sorter .custom-select-options {
+  display: none;
+  background-color: #901C1C;
+  padding: 10px;
+  padding-inline: 19px;
+  width: 170px;
+  position: absolute;
+  top: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+}
+.expo_section .expo_sorter .custom-select-options-first {
+  cursor: pointer;
+}
+.expo_section .expo_sorter .custom-select-options-first::before {
+  content: "";
+  border-top: white 2px solid;
+  display: block;
+  width: 170px;
+  position: absolute;
+  top: 2px;
+}
+.expo_section .expo_sorter .custom-select-options-first::after {
+  content: "";
+  border-top: white 2px solid;
+  display: block;
+  width: 170px;
+  position: absolute;
+  top: 45px;
+}
+.expo_section .expo_sorter .custom-select-options-second {
+  cursor: pointer;
+  margin-top: 15px;
 }
 .expo_section .expo_wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 70px;
   margin-top: 100px;
   margin-inline: 120px;
@@ -120,7 +183,10 @@ form input {
   width: 350px;
 }
 .expo_section .expo_wrapper_card_btn {
+  border-radius: 15px;
   padding: 0;
+  border: none;
+  overflow: hidden;
 }
 .expo_section .expo_wrapper_card_btn_img {
   cursor: pointer;
@@ -226,6 +292,11 @@ form input {
 .fixed-likes-price .photographer_info_price {
   margin-inline: 20px;
   margin-block: 0;
+}
+
+/** CUSTOM SELECT */
+.expo_sorter select {
+  display: none; /*hide original SELECT element:*/
 }
 
 body {
