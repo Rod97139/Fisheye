@@ -124,8 +124,9 @@ export const expoCustomSelectTemplate = (App) => {
     inexOfSlected > -1 ? options.splice(inexOfSlected, 1) : false;
     const newSelect = document.createElement( 'div' );
     newSelect.classList.add('custom-select');
-    const selected = document.createElement( 'div' );
+    const selected = document.createElement( 'button' );
     selected.classList.add('custom-select-selected');
+
     selected.textContent = optionsFr[inexOfSlected];
     
     inexOfSlected > -1 ? optionsFr.splice(inexOfSlected, 1) : false;
@@ -135,14 +136,14 @@ export const expoCustomSelectTemplate = (App) => {
     selected.addEventListener('click', () => {
         optionsDiv.style.display = optionsDiv.style.display === 'block' ? 'none' : 'block';
     })
-    const firstOption = document.createElement( 'div' );
+    const firstOption = document.createElement( 'button' );
     
     firstOption.classList.add('custom-select-options-first');
     firstOption.textContent = optionsFr[0];
     firstOption.addEventListener('click', () => {
         selectChangeEvent(indexOfFirst);
     })
-    const secondOption = document.createElement( 'div' );
+    const secondOption = document.createElement( 'button' );
     secondOption.classList.add('custom-select-options-second');
     secondOption.textContent = optionsFr[1];
     secondOption.addEventListener('click', () => {

@@ -150,38 +150,66 @@ form input {
             }
             &-options {
                 display: none;
-                background-color: #901C1C;
-                padding: 10px;
-                padding-inline: 19px;
-                width: 170px;
                 position: absolute;
-                top: 50px;
-                font-size: 20px;
-                font-weight: bold;
-                color: white;
-                border-radius: 5px;
+                top: 58px;
+                left: 15px;
+                // background-color: #901C1C;
+                // padding: 10px;
+                // padding-inline: 19px;
+                // width: 120px;
+                // position: absolute;
+                // top: 50px;
+                // font-size: 20px;
+                // font-weight: bold;
+                // color: white;
+                // border-radius: 5px;
                 &-first {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: white;
+                    padding: 19px;
+                    width: 170px;
+                    margin: auto;
+                    border: none;
+                    background-color: #901C1C;
+                    
                     cursor: pointer;
                     &::before{
                         content: "";
                         border-top: white 2px solid;
                         display: block;
-                        width: 170px;
+                        width: 150px;
                         position: absolute;
-                        top: 2px;
+                        top: 0;
+                        left: 11px;
                     }
                     &::after {
                         content: "";
                         border-top: white 2px solid;
                         display: block;
-                        width: 170px;
+                        width: 150px;
                         position: absolute;
-                        top: 45px;
+                        top: 63px;
+                        left: 11px;
                     }
                 }
                 &-second {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: white;
+                    padding: 19px;
+                    width: 170px;
+                    margin: auto;
+                    border: none;
+                    background-color: #901C1C;
+                    border-radius: 0 0 5px 5px;
                     cursor: pointer;
-                    margin-top: 15px;
                 }
             }
         }
