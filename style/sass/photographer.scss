@@ -286,7 +286,10 @@ form textarea {
                     font-weight: lighter;
 
                 }
-                &_like {
+                &_like::after {
+                    content: url(../../assets/icons/like.svg);
+                    
+                    margin-left: 10px;
 
                 }
             }
@@ -380,6 +383,10 @@ form textarea {
     .likeTotal {
         margin-inline: 20px;
         margin-block: 0;
+    }
+    .likeTotal::after {
+        content: url(../../assets/icons/like-black.svg);
+        margin-inline: 10px;
     }
     .photographer_info_price {
         margin-inline: 20px;
