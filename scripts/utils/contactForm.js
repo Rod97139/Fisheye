@@ -28,6 +28,9 @@ export const displayModal = () => {
 
 	/* form */
 	const modalForm = document.createElement("form");
+	modalForm.name = "contact";
+	modalForm.action = "";
+	modalForm.method = "post";
 
 	const contactArrayKeys = Object.keys(contactArray);
 	console.log(Object.keys(contactArray).length, "contactArray length");
@@ -41,33 +44,27 @@ export const displayModal = () => {
 		modalFormLabel.textContent = key;
 		modalFormLabel.htmlFor = value;
 
-		const modalFormInput = document.createElement("input");
-		modalFormInput.id = value;
-		modalFormInput.name = value;
+		let modalFormInput;
+		
+		
 		if (value === "message") {
-
-			const modalFormTextArea = document.createElement("textarea");
-			modalFormTextArea.id = value;
-			modalFormTextArea.name = value;
-			modalForm.appendChild(modalFormLabel);
-			modalForm.appendChild(modalFormTextArea);
+			modalFormInput = document.createElement("textarea");
 			
 		} else if (value === "email") {
+			modalFormInput = document.createElement("input");
 			modalFormInput.type = "email";
-			
-			modalForm.appendChild(modalFormLabel);
-			modalForm.appendChild(modalFormInput);
 		} else {
+			modalFormInput = document.createElement("input");
 			modalFormInput.type = "text";
-			
-			
-			modalForm.appendChild(modalFormLabel);
-			modalForm.appendChild(modalFormInput);
-			
-			
 		}
 		
-		
+		modalFormInput.id = value;
+		modalFormInput.name = value;
+		const formData = document.createElement("div");
+		formData.classList.add("formData");
+		formData.appendChild(modalFormLabel);
+		formData.appendChild(modalFormInput);
+		modalForm.appendChild(formData);
 	}
 
 
@@ -84,6 +81,7 @@ export const displayModal = () => {
 	modalForm.appendChild(modalFormButton);
 	const $main = document.querySelector("main");
 	$main.prepend(newModal);
+	formEvents();
 	
     return newModal
 }
@@ -99,4 +97,39 @@ export const checkEmail = () => {
 	const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 	const emailTest = emailRegex.test(email);
 	return emailTest;
+  }
+  // Verifier le champ du formulaire avec en argument l'input
+export const checkInput = (input) => {
+    let errorMessage = '';
+    const inputContainer = input.parentElement;
+  
+    // Verifier si le champ est vide
+  if (!input.value.trim()) {
+    errorMessage = "Veuillez renseigner ce champ";
+    //return
+    // Si il n'est pas vide, verifier si le format est correct en fonction de l'id de l'input
+  } else {
+
+    switch (input.id) {
+      case "firstname":
+      case "lastname":
+        errorMessage = checkName(input.value) ? "" : "Veuillez entrer au moins 2 caractères valides";
+        break;
+      case "email":
+        errorMessage = checkEmail() ? "" : "Veuillez entrer une adresse email valide";
+        break;
+      case "message":
+		errorMessage = checkName(input.value) ? "" : "Veuillez entrer au moins 2 caractères valides";
+        break;
+    }
+  }
+  inputContainer.dataset.error = errorMessage;
+  inputContainer.dataset.errorVisible = (!!errorMessage).toString();
+}
+
+
+export const formEvents = () => {
+	const contactForm = document.querySelector("form[name='contact']");
+
+	contactForm.addEventListener("blur", e => checkInput(e.target), true);
   }

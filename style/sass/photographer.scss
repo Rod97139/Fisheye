@@ -45,6 +45,13 @@ form label {
     color: #312E2E;
     font-size: 36px;
 }
+form .formData {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
 
 form input {
@@ -60,6 +67,30 @@ form textarea {
     border: none;
     border-radius: 5px;
 }
+
+.formData[data-error]::after {
+    content: attr(data-error);
+    font-size: 2em;
+    color: #e54858;
+    display: none;
+    
+    margin-top: 19px;
+    margin-bottom: 7px;
+    text-align: left;
+    line-height: 0.3;
+    opacity: 0;
+    transition: 0.3s;
+    position: absolute;
+    right: 650px;
+    
+  }
+  .formData[data-error-visible="true"]::after {
+    opacity: 1;
+    display: block;
+  }
+  textarea[data-error-visible="true"], input[data-error-visible="true"] {
+    border: 2px solid #e54858;
+  }
 
 .photograph-header {
     background-color: #FAFAFA;
