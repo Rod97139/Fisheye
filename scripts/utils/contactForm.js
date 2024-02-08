@@ -130,6 +130,21 @@ export const checkInput = (input) => {
 
 export const formEvents = () => {
 	const contactForm = document.querySelector("form[name='contact']");
+	const formDatas = contactForm.querySelectorAll(".formData input, .formData textarea");
 
 	contactForm.addEventListener("blur", e => checkInput(e.target), true);
+
+	contactForm.addEventListener("submit", e => {
+		let nbTextErrors = 0;
+		e.preventDefault();
+		formDatas.forEach(input => {
+			checkInput(input);
+			nbTextErrors += input.parentElement.dataset.error ? 1 : 0;
+		});
+	  
+		if (!nbTextErrors) {
+		  contactForm.reset();
+		}
+	  });
+	  
   }

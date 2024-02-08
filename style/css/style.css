@@ -72,14 +72,14 @@ form textarea {
   font-size: 2em;
   color: #e54858;
   display: none;
-  margin-top: 19px;
+  margin-top: 67px;
   margin-bottom: 7px;
   text-align: left;
   line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
   position: absolute;
-  right: 650px;
+  right: 660px;
 }
 
 .formData[data-error-visible=true]::after {
@@ -87,7 +87,7 @@ form textarea {
   display: block;
 }
 
-textarea[data-error-visible=true], input[data-error-visible=true] {
+.formData[data-error-visible=true] textarea, .formData[data-error-visible=true] input {
   border: 2px solid #e54858;
 }
 
