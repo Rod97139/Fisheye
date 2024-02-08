@@ -255,14 +255,24 @@ form textarea {
   flex-direction: row;
   justify-content: space-between;
   color: #901C1C;
+  align-items: center;
 }
 .expo_section .expo_wrapper_card_info_title {
   font-size: 24px;
   font-weight: lighter;
 }
-.expo_section .expo_wrapper_card_info_like::after {
-  content: url(../../assets/icons/like.svg);
-  margin-left: 10px;
+.expo_section .expo_wrapper_card_info_like {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.expo_section .expo_wrapper_card_info_like_number {
+  font-size: 24px;
+  font-weight: lighter;
+}
+.expo_section .expo_wrapper_card_info_like_icon {
+  cursor: pointer;
+  margin-left: 5px;
 }
 
 #myLightbox {

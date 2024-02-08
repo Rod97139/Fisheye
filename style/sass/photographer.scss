@@ -281,15 +281,26 @@ form textarea {
                 flex-direction: row;
                 justify-content: space-between;
                 color: #901C1C;
+                align-items: center;
                 &_title {
                     font-size: 24px;
                     font-weight: lighter;
 
                 }
-                &_like::after {
-                    content: url(../../assets/icons/like.svg);
-                    
-                    margin-left: 10px;
+                &_like { 
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+
+                    &_number {
+                        font-size: 24px;
+                        font-weight: lighter;
+                    }
+                    &_icon {
+                        cursor: pointer;
+                        margin-left: 5px ;
+                        
+                    }
 
                 }
             }
