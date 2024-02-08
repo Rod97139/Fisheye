@@ -89,6 +89,10 @@ class PhotographerPage extends Page {
 
 
             const expoCardDOM = mediaModel.getExpoCardDOM();
+            const likeButton = expoCardDOM.querySelector('.expo_wrapper_card_info_like')
+            if (media.isLiked) {
+                likeButton.classList.add('liked')
+            }
             this.$expoWrapper.appendChild(expoCardDOM);
         }
     }
@@ -147,6 +151,17 @@ class PhotographerPage extends Page {
                         likeNumber.classList.add('liked')
                         likeTotal.textContent = parseInt(likeTotal.textContent) + 1
                         this.totalLikes += 1
+                        this.medias[index-1].likes += 1
+                        this.medias[index-1].isLiked = 1
+                        window.localStorage.setItem(`media-${this.photographerId}`, JSON.stringify(this.medias));
+                    } else {
+                        likeNumber.textContent = parseInt(likeNumber.textContent) - 1
+                        likeNumber.classList.remove('liked')
+                        likeTotal.textContent = parseInt(likeTotal.textContent) - 1
+                        this.totalLikes -= 1
+                        this.medias[index-1].likes -= 1
+                        this.medias[index-1].isLiked = 0
+                        window.localStorage.setItem(`media-${this.photographerId}`, JSON.stringify(this.medias));
                     }
                     
                 }
