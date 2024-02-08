@@ -33,12 +33,10 @@ export const displayModal = () => {
 	modalForm.method = "post";
 
 	const contactArrayKeys = Object.keys(contactArray);
-	console.log(Object.keys(contactArray).length, "contactArray length");
 
 	for (let i = 0; i < contactArrayKeys.length; i++) {
 		const key = contactArrayKeys[i];
 		const value = contactArray[key];
-		console.log(value,key, "element");
 
 		const modalFormLabel = document.createElement("label");
 		modalFormLabel.textContent = key;
@@ -131,6 +129,12 @@ export const checkInput = (input) => {
 export const formEvents = () => {
 	const contactForm = document.querySelector("form[name='contact']");
 	const formDatas = contactForm.querySelectorAll(".formData input, .formData textarea");
+	const formValidData = {
+		firstname: "",
+		lastname: "",
+		email: "",
+		message: ""
+	}
 
 	contactForm.addEventListener("blur", e => checkInput(e.target), true);
 
@@ -139,11 +143,16 @@ export const formEvents = () => {
 		e.preventDefault();
 		formDatas.forEach(input => {
 			checkInput(input);
+			formValidData[input.id] = input.value;
 			nbTextErrors += input.parentElement.dataset.error ? 1 : 0;
 		});
 	  
 		if (!nbTextErrors) {
 		  contactForm.reset();
+		  const modal = document.querySelector('#contact_modal');
+		  console.log(formValidData, "Données envoyées");
+		  modal.style.display = 'none';
+		  modal.setAttribute("aria-hidden", "true");
 		}
 	  });
 	  

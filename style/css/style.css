@@ -260,6 +260,11 @@ form textarea {
   font-size: 24px;
   font-weight: lighter;
 }
+.expo_section .expo_wrapper_card_info_like::after {
+  content: url(../../assets/icons/like.svg);
+  margin-left: 10px;
+}
+
 #myLightbox {
   filter: blur(0);
   position: fixed;
@@ -344,6 +349,10 @@ form textarea {
 .fixed-likes-price .likeTotal {
   margin-inline: 20px;
   margin-block: 0;
+}
+.fixed-likes-price .likeTotal::after {
+  content: url(../../assets/icons/like-black.svg);
+  margin-inline: 10px;
 }
 .fixed-likes-price .photographer_info_price {
   margin-inline: 20px;

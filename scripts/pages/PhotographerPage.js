@@ -51,7 +51,6 @@ class PhotographerPage extends Page {
             sorterTag.textContent = 'Trier par'
             sorterTag.classList.add('expo_sorter_tag')
             $expoSorter.appendChild(sorterTag)
-            console.log($expoSorter.textContent);
             $expoSorter.appendChild(expoSorterTemplate(this))
             const select = document.querySelector('#sorter')
             select.classList.add('expo_sorter_select')
@@ -90,10 +89,12 @@ class PhotographerPage extends Page {
 
 
             const expoCardDOM = mediaModel.getExpoCardDOM();
+            const likeButton = expoCardDOM.querySelector('.expo_wrapper_card_info_like')
+            if (media.isLiked) {
+                likeButton.classList.add('liked')
+            }
             this.$expoWrapper.appendChild(expoCardDOM);
         }
-
-        console.log(this.totalLikes);
     }
 
     async displayPhotographerData (photographer) {
@@ -132,6 +133,7 @@ class PhotographerPage extends Page {
         }
         
         const $mediaCards = document.querySelectorAll('.expo_wrapper article')
+        
         let i = 0
         const $mySlides = document.querySelectorAll('.mySlides')
         for (const $mediaCard of $mediaCards) {
@@ -149,6 +151,17 @@ class PhotographerPage extends Page {
                         likeNumber.classList.add('liked')
                         likeTotal.textContent = parseInt(likeTotal.textContent) + 1
                         this.totalLikes += 1
+                        this.medias[index-1].likes += 1
+                        this.medias[index-1].isLiked = 1
+                        window.localStorage.setItem(`media-${this.photographerId}`, JSON.stringify(this.medias));
+                    } else {
+                        likeNumber.textContent = parseInt(likeNumber.textContent) - 1
+                        likeNumber.classList.remove('liked')
+                        likeTotal.textContent = parseInt(likeTotal.textContent) - 1
+                        this.totalLikes -= 1
+                        this.medias[index-1].likes -= 1
+                        this.medias[index-1].isLiked = 0
+                        window.localStorage.setItem(`media-${this.photographerId}`, JSON.stringify(this.medias));
                     }
                     
                 }
@@ -182,7 +195,8 @@ class PhotographerPage extends Page {
                 }
             })(i))
 
-            $mediaCard.addEventListener('click', ((index) => {
+            const $mediaButton = $mediaCard.querySelector('button')
+            $mediaButton.addEventListener('click', ((index) => {
                 return () => {
                     currentSlide(index)
                     lightbox.style.display = 'block'
