@@ -146,7 +146,7 @@ class PhotographerPage extends Page {
                     if (!likeIcon.classList.contains('liked')) {
                         likeNumber.textContent = parseInt(likeNumber.textContent) + 1
                         likeIcon.classList.add('liked')
-                        likeIcon.src = 'assets/icons/like-black.svg'
+                        likeIcon.src = 'assets/icons/liked.svg'
                         likeTotal.textContent = parseInt(likeTotal.textContent) + 1
                         this.totalLikes += 1
                         this.medias[index-1].likes += 1

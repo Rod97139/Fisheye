@@ -277,13 +277,14 @@ form textarea {
                 }
             }
             &_info {
+                
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 color: #901C1C;
                 align-items: center;
                 &_title {
-                    font-size: 24px;
+                    font-size: 21px;
                     font-weight: lighter;
 
                 }
@@ -293,7 +294,7 @@ form textarea {
                     align-items: center;
 
                     &_number {
-                        font-size: 24px;
+                        font-size: 21px;
                         font-weight: lighter;
                     }
                     &_icon {
@@ -325,11 +326,35 @@ form textarea {
             display: flex;
             align-items: center;
             justify-content: center;
+            // &:has(img:hover)::before {
+            //     content: attr(data-title);
+            //     position: absolute;
+            //     color: red;
+            //     font-size: 2em;
+            //     background-color: white;
+            //     padding: 10px;
+
+            //     z-index: 2000;
+                
+            // }
+            // &::before {
+            //     content: attr(data-title);
+            //     position: absolute;
+            //     color: red;
+            //     font-size: 2em;
+            //     background-color: white;
+            //     padding: 10px;
+
+            //     z-index: 2000;
+                
+            // }
             img {
                 width: 100%;
+                
                 max-height: 900px;
                 object-fit: contain;
             }
+            
             video {
                 width: 100%;
                 max-height: 900px;
