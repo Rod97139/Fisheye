@@ -89,10 +89,6 @@ class PhotographerPage extends Page {
 
 
             const expoCardDOM = mediaModel.getExpoCardDOM();
-            const likeButton = expoCardDOM.querySelector('.expo_wrapper_card_info_like')
-            if (media.isLiked) {
-                likeButton.classList.add('liked')
-            }
             this.$expoWrapper.appendChild(expoCardDOM);
         }
     }
@@ -143,12 +139,14 @@ class PhotographerPage extends Page {
             const closeBtn = $mySlides[i-1].querySelector('.close')
             const likeNumber = $mediaCard.querySelector('.like')
             const likeTotal = document.querySelector('.likeTotal')
+            const likeIcon = $mediaCard.querySelector('.expo_wrapper_card_info_like_icon')
 
-            likeNumber.addEventListener('click', ((index) => {
+            likeIcon.addEventListener('click', ((index) => {
                 return () => {
-                    if (!likeNumber.classList.contains('liked')) {
+                    if (!likeIcon.classList.contains('liked')) {
                         likeNumber.textContent = parseInt(likeNumber.textContent) + 1
-                        likeNumber.classList.add('liked')
+                        likeIcon.classList.add('liked')
+                        likeIcon.src = 'assets/icons/like-black.svg'
                         likeTotal.textContent = parseInt(likeTotal.textContent) + 1
                         this.totalLikes += 1
                         this.medias[index-1].likes += 1
@@ -156,7 +154,8 @@ class PhotographerPage extends Page {
                         window.localStorage.setItem(`media-${this.photographerId}`, JSON.stringify(this.medias));
                     } else {
                         likeNumber.textContent = parseInt(likeNumber.textContent) - 1
-                        likeNumber.classList.remove('liked')
+                        likeIcon.classList.remove('liked')
+                        likeIcon.src = 'assets/icons/like.svg'
                         likeTotal.textContent = parseInt(likeTotal.textContent) - 1
                         this.totalLikes -= 1
                         this.medias[index-1].likes -= 1

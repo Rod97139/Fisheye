@@ -21,23 +21,40 @@ class MediaFactory {
                         img.classList.add('expo_wrapper_card_btn_img');
                         img.setAttribute("src", picture)
                         img.setAttribute("alt", title)
-                        
                         img.classList.add('expo_img')
                         const pictureTitle = document.createElement( 'h2' );
                         pictureTitle.classList.add('expo_wrapper_card_info_title');
                         pictureTitle.textContent = title;
+
+
                         const $like = document.createElement('p');
-                        $like.classList.add('expo_wrapper_card_info_like');
+                        $like.classList.add('expo_wrapper_card_info_like_number');
                         $like.classList.add('like');
                         $like.textContent = likes;
+
+                        
+                                const likeIcon = document.createElement('img')
+                                likeIcon.classList.add('expo_wrapper_card_info_like_icon')
+                                likeIcon.src = 'assets/icons/like.svg'
+                                const likeDiv = document.createElement('div')
+                                likeDiv.classList.add('expo_wrapper_card_info_like')
+                                likeDiv.appendChild($like)
+                                likeDiv.appendChild(likeIcon)
+
+
+                                if (data.isLiked) {
+                                        likeIcon.classList.add('liked')
+                                        likeIcon.src = 'assets/icons/like-black.svg'
+                                }
 
 
                         btn.appendChild(img);
                         article.appendChild(btn);
+
                         const infoMedia = document.createElement('div');
                         infoMedia.classList.add('expo_wrapper_card_info');
                         infoMedia.appendChild(pictureTitle);
-                        infoMedia.appendChild($like);
+                        infoMedia.appendChild(likeDiv);
                         article.appendChild(infoMedia);
                         
                 
@@ -91,16 +108,32 @@ class MediaFactory {
                                 const pictureTitle = document.createElement( 'h2' );
                                 pictureTitle.textContent = title;
                                 pictureTitle.classList.add('expo_wrapper_card_info_title');
+
                                 const $like = document.createElement('p');
                                 $like.classList.add('like');
                                 $like.textContent = likes;
-                                $like.classList.add('expo_wrapper_card_info_like');
+                                $like.classList.add('expo_wrapper_card_info_like_number');
+
+                                        const likeIcon = document.createElement('img')
+                                        likeIcon.classList.add('expo_wrapper_card_info_like_icon')
+                                        likeIcon.src = 'assets/icons/like.svg'
+                                        const likeDiv = document.createElement('div')
+                                        likeDiv.classList.add('expo_wrapper_card_info_like')
+                                        likeDiv.appendChild($like)
+                                        likeDiv.appendChild(likeIcon)
+
+                                        if (data.isLiked) {
+                                                likeIcon.classList.add('liked')
+                                                likeIcon.src = 'assets/icons/like-black.svg'
+                                        }
+
                                 btn.appendChild(video);
                                 article.appendChild(btn);
+
                                 const infoMedia = document.createElement('div');
                                 infoMedia.classList.add('expo_wrapper_card_info');
                                 infoMedia.appendChild(pictureTitle);
-                                infoMedia.appendChild($like);
+                                infoMedia.appendChild(likeDiv);
                                 article.appendChild(infoMedia);
                         
                                 return (article);
