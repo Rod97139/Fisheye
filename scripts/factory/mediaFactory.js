@@ -4,7 +4,6 @@
 class MediaFactory {
         constructor(data, photographer) {
 
-                // console.log(expoImageTemplate(data, photographer));
                 // Si le type correspond à l'ancienne API, alors retourne-moi l'ancien formatage
                 if (data.image) {
                 const { title, file, bigFile, likes } = data;

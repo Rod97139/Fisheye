@@ -51,7 +51,6 @@ class PhotographerPage extends Page {
             sorterTag.textContent = 'Trier par'
             sorterTag.classList.add('expo_sorter_tag')
             $expoSorter.appendChild(sorterTag)
-            console.log($expoSorter.textContent);
             $expoSorter.appendChild(expoSorterTemplate(this))
             const select = document.querySelector('#sorter')
             select.classList.add('expo_sorter_select')
@@ -92,8 +91,6 @@ class PhotographerPage extends Page {
             const expoCardDOM = mediaModel.getExpoCardDOM();
             this.$expoWrapper.appendChild(expoCardDOM);
         }
-
-        console.log(this.totalLikes);
     }
 
     async displayPhotographerData (photographer) {
@@ -132,6 +129,7 @@ class PhotographerPage extends Page {
         }
         
         const $mediaCards = document.querySelectorAll('.expo_wrapper article')
+        
         let i = 0
         const $mySlides = document.querySelectorAll('.mySlides')
         for (const $mediaCard of $mediaCards) {
@@ -182,7 +180,8 @@ class PhotographerPage extends Page {
                 }
             })(i))
 
-            $mediaCard.addEventListener('click', ((index) => {
+            const $mediaButton = $mediaCard.querySelector('button')
+            $mediaButton.addEventListener('click', ((index) => {
                 return () => {
                     currentSlide(index)
                     lightbox.style.display = 'block'
