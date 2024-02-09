@@ -1,7 +1,9 @@
 
 
 #contact_modal {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -15,12 +17,24 @@
     border-radius: 5px;
     margin: auto;
     background-color: #DB8876;
-    width: 669px;
-    height: 900px;
+    width: 500px;
+    height: 90%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 35px;
+    
+    form {
+        .contact_button {
+            margin-top: 20px;
+            width: 200px;
+            height: 60px;
+            border: none;
+            border-radius: 5px;
+            background-color: #901C1C;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;}
+    }
 }
 
 .modal header img {
@@ -51,19 +65,20 @@ form .formData {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    font-size: 12px;
 }
 
 
 form input {
     width: 100%;
-    height: 68px;
+    height: 40px;
     border: none;
     border-radius: 5px;
 }
 
 form textarea {
     width: 100%;
-    height: 200px;
+    height: 150px;
     border: none;
     border-radius: 5px;
 }
@@ -81,7 +96,7 @@ form textarea {
     opacity: 0;
     transition: 0.3s;
     position: absolute;
-    right: 660px;
+    right: 740px;
     
   }
   .formData[data-error-visible="true"]::after {
@@ -123,7 +138,7 @@ form textarea {
         }
         &_contact {
             font-size: 20px;
-            font-weight: bold;
+            font-weight: normal;
             color: white;
             padding: 11px;
             width: 170px;
@@ -165,16 +180,16 @@ form textarea {
             left: 200px;
             display: flex;
             flex-direction: column;
-            width: 200px;
+            width: 210px;
             &-selected {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 font-size: 20px;
-                font-weight: bold;
+                font-weight: normal;
                 color: white;
                 padding: 19px;
-                width: 170px;
+                width: 200px;
                 margin: auto;
                 border: none;
                 background-color: #901C1C;
@@ -184,12 +199,15 @@ form textarea {
                     content: url(../../assets/icons/down-arrow.svg);
                     margin-left: 20px;
                 }
+                &.open::after {
+                    content: url(../../assets/icons/up-arrow.svg);
+                }
             }
             &-options {
                 display: none;
                 position: absolute;
                 top: 58px;
-                left: 15px;
+                left: 5px;
                 // background-color: #901C1C;
                 // padding: 10px;
                 // padding-inline: 19px;
@@ -205,10 +223,10 @@ form textarea {
                     flex-direction: row;
                     justify-content: space-between;
                     font-size: 20px;
-                    font-weight: bold;
+                    font-weight: normal;
                     color: white;
                     padding: 19px;
-                    width: 170px;
+                    width: 200px;
                     margin: auto;
                     border: none;
                     background-color: #901C1C;
@@ -216,21 +234,21 @@ form textarea {
                     cursor: pointer;
                     &::before{
                         content: "";
-                        border-top: white 2px solid;
+                        border-top: white 1px solid;
                         display: block;
-                        width: 150px;
+                        width: 170px;
                         position: absolute;
                         top: 0;
-                        left: 11px;
+                        left: 15px;
                     }
                     &::after {
                         content: "";
-                        border-top: white 2px solid;
+                        border-top: white 1px solid;
                         display: block;
-                        width: 150px;
+                        width: 170px;
                         position: absolute;
                         top: 63px;
-                        left: 11px;
+                        left: 15px;
                     }
                 }
                 &-second {
@@ -238,10 +256,10 @@ form textarea {
                     flex-direction: row;
                     justify-content: space-between;
                     font-size: 20px;
-                    font-weight: bold;
+                    font-weight: normal;
                     color: white;
                     padding: 19px;
-                    width: 170px;
+                    width: 200px;
                     margin: auto;
                     border: none;
                     background-color: #901C1C;
@@ -277,13 +295,14 @@ form textarea {
                 }
             }
             &_info {
+                
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 color: #901C1C;
                 align-items: center;
                 &_title {
-                    font-size: 24px;
+                    font-size: 21px;
                     font-weight: lighter;
 
                 }
@@ -293,7 +312,7 @@ form textarea {
                     align-items: center;
 
                     &_number {
-                        font-size: 24px;
+                        font-size: 21px;
                         font-weight: lighter;
                     }
                     &_icon {
@@ -325,11 +344,35 @@ form textarea {
             display: flex;
             align-items: center;
             justify-content: center;
+            // &:has(img:hover)::before {
+            //     content: attr(data-title);
+            //     position: absolute;
+            //     color: red;
+            //     font-size: 2em;
+            //     background-color: white;
+            //     padding: 10px;
+
+            //     z-index: 2000;
+                
+            // }
+            // &::before {
+            //     content: attr(data-title);
+            //     position: absolute;
+            //     color: red;
+            //     font-size: 2em;
+            //     background-color: white;
+            //     padding: 10px;
+
+            //     z-index: 2000;
+                
+            // }
             img {
                 width: 100%;
+                
                 max-height: 900px;
                 object-fit: contain;
             }
+            
             video {
                 width: 100%;
                 max-height: 900px;
@@ -338,7 +381,7 @@ form textarea {
             .prev {
                 position: absolute;
                 top: 50%;
-                left: 0;
+                left: 25px;
                 cursor: pointer;
                 color: transparent;
                 &::before {
@@ -358,7 +401,7 @@ form textarea {
             }
             .close {
                 position: absolute;
-                top: 0;
+                top: 25px;
                 right: 0;
                 cursor: pointer;
                 color: transparent;
@@ -384,20 +427,26 @@ form textarea {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    
     padding: 20px;
     background-color: #DB8876;
     border-radius: 5px 5px 0 0;
     color: black;
     font-size: 24px;
     font-weight: lighter;
+    height: 12px;
+    width: 280px;
     .likeTotal {
         margin-inline: 20px;
         margin-block: 0;
     }
     .likeTotal::after {
         content: url(../../assets/icons/like-black.svg);
-        margin-inline: 10px;
+        position: absolute;
+        top: 12px;
+        left: 90px;
+
     }
     .photographer_info_price {
         margin-inline: 20px;
@@ -412,5 +461,16 @@ form textarea {
   
   .expo_sorter select {
     display: none; /*hide original SELECT element:*/
+  }
+
+  .btn {
+    &:hover {
+        background-color: #DB8876;
+        color: black;
+    }
+    &:focus {
+        background-color: #DB8876;
+        color: black;
+    }
   }
   

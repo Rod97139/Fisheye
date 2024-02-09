@@ -44,6 +44,8 @@ export const showSlides = (n) => {
 export const currentSlide = (n) => {
     showSlides(n);
     const DomToHide = document.querySelectorAll('main section')
+    const customSelect = document.querySelector('.custom-select')
+    customSelect.style.display = 'none'
     const header = document.querySelector('header')
     header.setAttribute("aria-hidden", "true");
     header.classList.add('blur')
@@ -54,6 +56,8 @@ export const currentSlide = (n) => {
 }
 
 export const closeLightbox = () => {
+    const customSelect = document.querySelector('.custom-select')
+    customSelect.style.display = 'block'
 
     const lightbox = document.querySelector('#myLightbox')
     lightbox.style.display = 'none'

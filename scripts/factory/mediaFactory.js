@@ -44,7 +44,7 @@ class MediaFactory {
 
                                 if (data.isLiked) {
                                         likeIcon.classList.add('liked')
-                                        likeIcon.src = 'assets/icons/like-black.svg'
+                                        likeIcon.src = 'assets/icons/liked.svg'
                                 }
 
 
@@ -64,6 +64,7 @@ class MediaFactory {
                 const getLightboxDOM = () => {
                         const mySlides = document.createElement( 'div' );
                         mySlides.classList.add('mySlides');
+                        mySlides.dataset.title = title;
                         const img = document.createElement( 'img' );
                         img.setAttribute("src", `assets/media/${firstName}/${bigFile}`)
                         img.setAttribute("alt", title)
@@ -124,7 +125,7 @@ class MediaFactory {
 
                                         if (data.isLiked) {
                                                 likeIcon.classList.add('liked')
-                                                likeIcon.src = 'assets/icons/like-black.svg'
+                                                likeIcon.src = 'assets/icons/liked.svg'
                                         }
 
                                 btn.appendChild(video);

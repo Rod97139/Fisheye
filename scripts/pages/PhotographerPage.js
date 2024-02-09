@@ -100,6 +100,7 @@ class PhotographerPage extends Page {
         const $btn = document.createElement('button')
         $btn.classList.add('contact_button')
         $btn.classList.add('photographer_contact')
+        $btn.classList.add('btn')
         $btn.textContent = 'Contactez-moi'
         const $photographerPicture = document.createElement('img')
         $photographerPicture.src = `assets/photographers/${photographer.portrait}`
@@ -146,7 +147,7 @@ class PhotographerPage extends Page {
                     if (!likeIcon.classList.contains('liked')) {
                         likeNumber.textContent = parseInt(likeNumber.textContent) + 1
                         likeIcon.classList.add('liked')
-                        likeIcon.src = 'assets/icons/like-black.svg'
+                        likeIcon.src = 'assets/icons/liked.svg'
                         likeTotal.textContent = parseInt(likeTotal.textContent) + 1
                         this.totalLikes += 1
                         this.medias[index-1].likes += 1

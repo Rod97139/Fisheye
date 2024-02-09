@@ -126,6 +126,7 @@ export const expoCustomSelectTemplate = (App) => {
     newSelect.classList.add('custom-select');
     const selected = document.createElement( 'button' );
     selected.classList.add('custom-select-selected');
+    selected.classList.add('btn');
 
     selected.textContent = optionsFr[inexOfSlected];
     
@@ -134,9 +135,12 @@ export const expoCustomSelectTemplate = (App) => {
     const optionsDiv = document.createElement( 'div' );
     optionsDiv.classList.add('custom-select-options');
     selected.addEventListener('click', () => {
+        
+        selected.classList.contains('open') ? selected.classList.remove('open') : selected.classList.add('open');
         optionsDiv.style.display = optionsDiv.style.display === 'block' ? 'none' : 'block';
     })
     const firstOption = document.createElement( 'button' );
+    firstOption.classList.add('btn');
     
     firstOption.classList.add('custom-select-options-first');
     firstOption.textContent = optionsFr[0];
@@ -144,6 +148,7 @@ export const expoCustomSelectTemplate = (App) => {
         selectChangeEvent(indexOfFirst);
     })
     const secondOption = document.createElement( 'button' );
+    secondOption.classList.add('btn');
     secondOption.classList.add('custom-select-options-second');
     secondOption.textContent = optionsFr[1];
     secondOption.addEventListener('click', () => {
@@ -162,3 +167,22 @@ export const selectChangeEvent = (index) => {
     select.selectedIndex = index;
     select.dispatchEvent(new Event('change'));
 }
+
+
+export const documentClickTri = (App) => {
+    if (!App.isDocumentClickEventEnabled) {
+        document.addEventListener("click", (event) => {
+            if (App.page.sortBy) {
+                const select = document.querySelector('.custom-select-selected');
+                const optionsDiv = document.querySelector('.custom-select-options');
+                if (event.target !== select && event.target !== optionsDiv) {
+                    select.classList.remove('open');
+                    optionsDiv.style.display = 'none';
+                }
+            }
+        });
+        App.isDocumentClickEventEnabled = true;
+        return;
+    }
+}
+

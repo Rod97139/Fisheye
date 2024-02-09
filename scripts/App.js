@@ -4,6 +4,7 @@ import { saveToLocalStorage } from "./api/localStorage.js";
 import PhotographerPage from "./pages/PhotographerPage.js";
 import HomePage from "./pages/HomePage.js";
 import { accessibilityEvents, currentSlide} from "./utils/lightbox.js";
+import { documentClickTri } from "./templates/expo.js";
 
 
 class App {
@@ -17,6 +18,7 @@ class App {
             '/Fisheye/photographer.html' : () => this.displayPhotographerPage()
         }
         this.accessibilityEventsEnabled = false
+        this.isDocumentClickEventEnabled = false
     }
 
     async getPhotographers() {
@@ -52,6 +54,8 @@ class App {
         photographerExist ? this.page = new PhotographerPage(photographerId, this.photographers, this) : document.location.href = 'index.html'
 
         accessibilityEvents(this)
+        
+        documentClickTri(this)
     }
 
     async main() {
