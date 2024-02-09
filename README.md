@@ -4,3 +4,7 @@
 
 Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.
 
+```npm init @eslint/config```
+
+```npx eslint scripts/**```
+

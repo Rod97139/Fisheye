@@ -167,7 +167,7 @@ class PhotographerPage extends Page {
                 }
             })(i))
 
-            closeBtn.addEventListener('click', ((index) => {
+            closeBtn.addEventListener('click', (() => {
                 return () => {
                     history.pushState({}, '', `?id=${this.photographerId}&sortBy=${this.sortBy}`)
                     this.displaiedMedia = null

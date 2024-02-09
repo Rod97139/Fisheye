@@ -4,7 +4,7 @@
   "description": "Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.",
   "main": "App.js",
   "scripts": {
-    "sass": "sass --watch style/sass:style/css" 
+    "sass": "sass --watch style/sass:style/css"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Rod97139/Fisheye/issues"
   },
-  "homepage": "https://github.com/Rod97139/Fisheye#readme"
+  "homepage": "https://github.com/Rod97139/Fisheye#readme",
+  "devDependencies": {
+    "eslint": "^8.56.0"
+  }
 }
