@@ -3,7 +3,7 @@ import DataApi from "./api/DataApi.js";
 import { saveToLocalStorage } from "./api/localStorage.js";
 import PhotographerPage from "./pages/PhotographerPage.js";
 import HomePage from "./pages/HomePage.js";
-import { accessibilityEvents, currentSlide} from "./utils/lightbox.js";
+import { accessibilityEvents} from "./utils/lightbox.js";
 import { documentClickTri } from "./templates/expo.js";
 
 

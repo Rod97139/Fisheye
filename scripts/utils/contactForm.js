@@ -1,3 +1,5 @@
+
+
 export const displayModal = () => {
 	const modal = document.querySelector('#contact_modal')
 	if (modal) {
@@ -86,7 +88,7 @@ export const displayModal = () => {
 }
 
 export const checkName = (name) => {
-	const nameRegex = /^[A-Za-z][A-Za-z\é\è\ê\-]+$/;
+	const nameRegex = /^[A-Za-z][A-Za-zéèê-]+$/;
 	const nameTest = nameRegex.test(name);
 	return nameTest;
   }
@@ -118,7 +120,7 @@ export const checkInput = (input) => {
         errorMessage = checkEmail() ? "" : "Veuillez entrer une adresse email valide";
         break;
       case "message":
-		errorMessage = checkName(input.value) ? "" : "Veuillez entrer au moins 2 caractères valides";
+		errorMessage = "";
         break;
     }
   }
@@ -147,14 +149,12 @@ export const formEvents = () => {
 			formValidData[input.id] = input.value;
 			nbTextErrors += input.parentElement.dataset.error ? 1 : 0;
 		});
-	  
 		if (!nbTextErrors) {
-		  contactForm.reset();
-		  const modal = document.querySelector('#contact_modal');
-		  console.log(formValidData, "Données envoyées");
-		  modal.style.display = 'none';
-		  modal.setAttribute("aria-hidden", "true");
+			contactForm.reset();
+			const modal = document.querySelector('#contact_modal');
+			console.log(formValidData, "Données envoyées");
+			modal.style.display = 'none';
+			modal.setAttribute("aria-hidden", "true");
 		}
-	  });
-	  
-  }
+	});
+}
