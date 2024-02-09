@@ -381,7 +381,7 @@ form textarea {
             .prev {
                 position: absolute;
                 top: 50%;
-                left: 0;
+                left: 25px;
                 cursor: pointer;
                 color: transparent;
                 &::before {
@@ -401,7 +401,7 @@ form textarea {
             }
             .close {
                 position: absolute;
-                top: 0;
+                top: 25px;
                 right: 0;
                 cursor: pointer;
                 color: transparent;
@@ -461,5 +461,16 @@ form textarea {
   
   .expo_sorter select {
     display: none; /*hide original SELECT element:*/
+  }
+
+  .btn {
+    &:hover {
+        background-color: #DB8876;
+        color: black;
+    }
+    &:focus {
+        background-color: #DB8876;
+        color: black;
+    }
   }
   

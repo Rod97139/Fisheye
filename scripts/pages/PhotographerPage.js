@@ -100,6 +100,7 @@ class PhotographerPage extends Page {
         const $btn = document.createElement('button')
         $btn.classList.add('contact_button')
         $btn.classList.add('photographer_contact')
+        $btn.classList.add('btn')
         $btn.textContent = 'Contactez-moi'
         const $photographerPicture = document.createElement('img')
         $photographerPicture.src = `assets/photographers/${photographer.portrait}`

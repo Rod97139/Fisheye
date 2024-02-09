@@ -69,6 +69,7 @@ export const displayModal = () => {
 
 	const modalFormButton = document.createElement("button");
 	modalFormButton.classList.add("contact_button");
+	modalFormButton.type = "submit";
 	modalFormButton.textContent = "Envoyer";
 
 	newModal.appendChild(modalContent);
