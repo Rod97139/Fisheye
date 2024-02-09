@@ -134,6 +134,8 @@ export const expoCustomSelectTemplate = (App) => {
     const optionsDiv = document.createElement( 'div' );
     optionsDiv.classList.add('custom-select-options');
     selected.addEventListener('click', () => {
+        
+        selected.classList.contains('open') ? selected.classList.remove('open') : selected.classList.add('open');
         optionsDiv.style.display = optionsDiv.style.display === 'block' ? 'none' : 'block';
     })
     const firstOption = document.createElement( 'button' );
