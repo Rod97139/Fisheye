@@ -85,6 +85,9 @@ export const expoPhotographerTemplate = (App, data) => {
 export const expoSorterTemplate = (Page) => {
     const select = document.createElement( 'select' );
     select.id = 'sorter';
+    const label = document.createElement( 'label' );
+    label.setAttribute('for', 'sorter');
+    label.style.display = 'none';
     const options = ['likes', 'date', 'title'];
     for (const option of options) {
         const optionDOM = document.createElement( 'option' );
@@ -102,7 +105,8 @@ export const expoSorterTemplate = (Page) => {
             optionDOM.setAttribute('selected', true);
         }
     }
-    return select;
+    label.appendChild(select);
+    return label;
 }   
 
 export const expoCustomSelectTemplate = (App) => {

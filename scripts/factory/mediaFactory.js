@@ -35,6 +35,7 @@ class MediaFactory {
 
                                 const likeIcon = document.createElement('img')
                                 likeIcon.classList.add('expo_wrapper_card_info_like_icon')
+                                likeIcon.alt = 'like icon'
                                 likeIcon.src = 'assets/icons/like.svg'
                                 const likeDiv = document.createElement('div')
                                 likeDiv.classList.add('expo_wrapper_card_info_like')
@@ -117,6 +118,7 @@ class MediaFactory {
 
                                 const likeIcon = document.createElement('img')
                                 likeIcon.classList.add('expo_wrapper_card_info_like_icon')
+                                likeIcon.alt = 'like icon'
                                 likeIcon.src = 'assets/icons/like.svg'
                                 const likeDiv = document.createElement('div')
                                 likeDiv.classList.add('expo_wrapper_card_info_like')
