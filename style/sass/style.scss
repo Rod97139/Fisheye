@@ -16,16 +16,22 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
+
 }
 
 h1 {
     color: #901C1C;
-    margin-right: 100px;
 }
 
 .logo {
     height: 50px;
     margin-left: 100px;
+    @media screen and (max-width: 1200px) {
+        margin-left: 20px;
+    }
+    @media screen and (max-width: 768px) {
+        height: 10vw;
+    }
 }
 
 .photographer_section {

@@ -113,18 +113,61 @@ form textarea {
   justify-content: space-between;
   align-items: center;
   padding: 50px;
+  position: relative;
+}
+@media screen and (max-width: 1200px) {
+  .photograph-header {
+    margin: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .photograph-header {
+    height: 50vw;
+    padding: 5vw;
+  }
 }
 .photograph-header .photographer_info_name {
   color: #D3573C;
-  font-size: 64px;
+  font-size: 4.5vw;
+  margin: 0 0 10px 0;
+}
+@media screen and (max-width: 1200px) {
+  .photograph-header .photographer_info_name {
+    font-size: 7vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  .photograph-header .photographer_info_name {
+    font-size: 10vw;
+  }
 }
 .photograph-header .photographer_info_location {
   color: #901C1C;
-  font-size: 24px;
+  font-size: 1.5vw;
+}
+@media screen and (max-width: 1200px) {
+  .photograph-header .photographer_info_location {
+    font-size: 2.5vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  .photograph-header .photographer_info_location {
+    font-size: 4vw;
+  }
 }
 .photograph-header .photographer_info_tagline {
   color: #525252;
-  font-size: 18px;
+  font-size: 1.3vw;
+}
+@media screen and (max-width: 1200px) {
+  .photograph-header .photographer_info_tagline {
+    font-size: 2vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  .photograph-header .photographer_info_tagline {
+    font-size: 3vw;
+  }
 }
 .photograph-header .photographer_contact {
   font-size: 20px;
@@ -138,18 +181,54 @@ form textarea {
   border-radius: 5px;
   cursor: pointer;
 }
+@media screen and (max-width: 1200px) {
+  .photograph-header .photographer_contact {
+    position: absolute;
+    top: -80px;
+    right: 20px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .photograph-header .photographer_contact {
+    width: 30vw;
+    font-size: 3vw;
+  }
+}
 .photograph-header .photographer_picture {
-  height: 200px;
-  width: 200px;
+  height: 15vw;
+  width: 15vw;
   border-radius: 50%;
   object-fit: cover;
 }
+@media screen and (max-width: 1200px) {
+  .photograph-header .photographer_picture {
+    height: 26vw;
+    width: 26vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  .photograph-header .photographer_picture {
+    height: 34vw;
+    width: 34vw;
+  }
+}
 
+.expo_section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
 .expo_section .expo_sorter {
   display: flex;
+  position: relative;
   flex-direction: row;
   margin-inline: 100px;
   margin-block: 50px;
+}
+@media screen and (max-width: 1200px) {
+  .expo_section .expo_sorter {
+    margin-inline: 20px;
+  }
 }
 .expo_section .expo_sorter_tag {
   font-size: 18px;
@@ -161,8 +240,7 @@ form textarea {
 }
 .expo_section .expo_sorter .custom-select {
   position: absolute;
-  top: 542px;
-  left: 200px;
+  right: -100px;
   display: flex;
   flex-direction: column;
   width: 210px;
@@ -243,16 +321,21 @@ form textarea {
   cursor: pointer;
 }
 .expo_section .expo_wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 70px;
-  margin-top: 100px;
-  margin-inline: 120px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
 }
 .expo_section .expo_wrapper_card {
   color: black;
   text-decoration: none;
   width: 350px;
+}
+@media screen and (max-width: 398px) {
+  .expo_section .expo_wrapper_card {
+    width: 100%;
+  }
 }
 .expo_section .expo_wrapper_card_btn {
   border-radius: 15px;
@@ -266,12 +349,23 @@ form textarea {
   height: 300px;
   width: 350px;
 }
+@media screen and (max-width: 398px) {
+  .expo_section .expo_wrapper_card_btn_img {
+    width: 100%;
+    height: 100%;
+  }
+}
 .expo_section .expo_wrapper_card_info {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   color: #901C1C;
   align-items: center;
+}
+@media screen and (max-width: 398px) {
+  .expo_section .expo_wrapper_card_info {
+    padding-inline: 10px;
+  }
 }
 .expo_section .expo_wrapper_card_info_title {
   font-size: 21px;
@@ -422,12 +516,21 @@ header {
 
 h1 {
   color: #901C1C;
-  margin-right: 100px;
 }
 
 .logo {
   height: 50px;
   margin-left: 100px;
+}
+@media screen and (max-width: 1200px) {
+  .logo {
+    margin-left: 20px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .logo {
+    height: 10vw;
+  }
 }
 
 .photographer_section {
