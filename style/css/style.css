@@ -388,9 +388,10 @@ form textarea {
 #myLightbox {
   filter: blur(0);
   position: fixed;
-  top: 10px;
   left: 0;
   right: 0;
+  top: 0;
+  bottom: 0;
 }
 #myLightbox .lightbox-content {
   height: 100%;
@@ -405,12 +406,12 @@ form textarea {
 }
 #myLightbox .lightbox-content .mySlides img {
   width: 100%;
-  max-height: 900px;
+  height: 100%;
   object-fit: contain;
 }
 #myLightbox .lightbox-content .mySlides video {
   width: 100%;
-  max-height: 900px;
+  height: 100%;
   object-fit: contain;
 }
 #myLightbox .lightbox-content .mySlides .prev {
