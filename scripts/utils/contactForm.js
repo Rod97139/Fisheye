@@ -3,7 +3,7 @@
 export const displayModal = () => {
 	const modal = document.querySelector('#contact_modal')
 	if (modal) {
-		modal.style.display = 'block'
+		modal.style.display = 'flex'
 		modal.setAttribute("aria-hidden", "false");
 		return modal
 	}
@@ -16,7 +16,6 @@ export const displayModal = () => {
 	}
     const newModal = document.createElement("div");
 	newModal.id = "contact_modal";
-	newModal.classList.add("modal");
 	newModal.setAttribute("role", "dialog");
 	newModal.setAttribute("aria-hidden", "false");
 
