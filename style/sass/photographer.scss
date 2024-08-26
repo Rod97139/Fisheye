@@ -2,6 +2,7 @@
 
 
 #contact_modal {
+    margin-inline : 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,20 +11,23 @@
     bottom: 0;
     left: 0;
     right: 0;
-    width: 100%;
     background-color: transparent;
     z-index: 1000;
 }
 .modal {
     border-radius: 5px;
-    margin: auto;
     background-color: #DB8876;
-    width: 500px;
-    height: 90%;
     display: flex;
     flex-direction: column;
     padding: 35px;
+    max-width: 500px;
+    max-height: 800px;
     
+    width: 90%;
+    @media screen and (max-width: 768px) {
+        padding: 10px;
+        height: 680px;
+    }
     form {
         .contact_button {
             margin-top: 20px;
@@ -34,18 +38,30 @@
             background-color: #901C1C;
             color: white;
             font-size: 24px;
-            cursor: pointer;}
+            cursor: pointer;
+            @media screen and (max-width: 768px) {
+                align-self: center;
+            }
+        }
     }
 }
 
 .modal header img {
     cursor: pointer;
+    @media screen and (max-width: 768px) {
+        width: 30px;
+        
+    }
 }
 
 .modal header h2 {
     font-size: 40px;
     font-weight: normal;
     text-align: center;
+    @media screen and (max-width: 768px) {
+        font-size: 30px;
+        
+    }
 }
 
 form {
@@ -59,11 +75,16 @@ form {
 form label {
     color: #312E2E;
     font-size: 36px;
+    @media screen and (max-width: 768px) {
+        font-size: 24px;
+        
+    }
 }
 form .formData {
     margin-top: 20px;
     width: 100%;
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: flex-start;
     font-size: 12px;
@@ -97,7 +118,11 @@ form textarea {
     opacity: 0;
     transition: 0.3s;
     position: absolute;
-    right: 740px;
+    right: 2px;
+    @media screen and (max-width: 768px) {
+        font-size: 1.5em;
+        top: -10px;
+    }
     
   }
   .formData[data-error-visible="true"]::after {
@@ -506,6 +531,10 @@ form textarea {
     font-weight: lighter;
     height: 12px;
     width: 280px;
+    @media screen and (max-width: 768px) {
+        right:0;
+        
+    }
     .likeTotal {
         margin-inline: 20px;
         margin-block: 0;

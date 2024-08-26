@@ -33,6 +33,15 @@ h1 {
         height: 10vw;
     }
 }
+.home-title-right{
+    margin-right: 100px;
+    @media screen and (max-width: 1200px) {
+        margin-right: 20px;
+    }
+    @media screen and (max-width: 768px) {
+        font-size: 4.8vw;
+    }
+}
 
 .photographer_section {
 
@@ -40,6 +49,13 @@ h1 {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 50px;
+    @media screen and (max-width: 1200px) {
+        grid-template-columns: 1fr 1fr;
+        
+    }
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
 
     .photographer_card {
         display: flex;
@@ -59,7 +75,7 @@ h1 {
         &_info {
             &_name {
                 color: #D3573C;
-                font-size: 36px;
+                font-size: 30px;
                 margin-bottom: 0;
             }
             &_location {
