@@ -19,7 +19,7 @@ class HomePage extends Page {
     }
 
     async displayNavNosPhotographe() {
-        !document.querySelector('header h1') && document.querySelector('header').insertAdjacentHTML('beforeend', '<h1>Nos photographes</h1>')
+        !document.querySelector('header h1') && document.querySelector('header').insertAdjacentHTML('beforeend', '<h1 class="home-title-right" >Nos photographes</h1>')
     }
 
     async main() {
