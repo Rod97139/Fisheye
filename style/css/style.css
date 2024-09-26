@@ -355,10 +355,28 @@ form textarea {
 }
 .expo_section .expo_wrapper {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  margin: auto;
+  gap: 10px;
+  width: 90%;
+}
+@media screen and (max-width: 1552px) {
+  .expo_section .expo_wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .expo_section .expo_wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 768px) {
+  .expo_section .expo_wrapper {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
 }
 .expo_section .expo_wrapper_card {
   color: black;
@@ -375,6 +393,14 @@ form textarea {
   padding: 0;
   border: none;
   overflow: hidden;
+  height: 300px;
+  width: 350px;
+}
+@media screen and (max-width: 398px) {
+  .expo_section .expo_wrapper_card_btn {
+    width: 100%;
+    height: 85vw;
+  }
 }
 .expo_section .expo_wrapper_card_btn_img {
   cursor: pointer;
@@ -385,7 +411,7 @@ form textarea {
 @media screen and (max-width: 398px) {
   .expo_section .expo_wrapper_card_btn_img {
     width: 100%;
-    height: 100%;
+    height: 85vw;
   }
 }
 .expo_section .expo_wrapper_card_info {
