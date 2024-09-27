@@ -12,6 +12,18 @@ export const displayLightbox = () => {
     const lightboxContent = document.createElement("div");
     lightboxContent.classList.add("lightbox-content");
     newLightbox.appendChild(lightboxContent);
+    const prev = document.createElement('a');
+    prev.classList.add('prev', 'hover-scale');
+    prev.textContent = 'prev';
+    newLightbox.appendChild(prev);
+    const next = document.createElement('a');
+    next.classList.add('next', 'hover-scale');
+    next.textContent = 'next';
+    newLightbox.appendChild(next);
+    const close = document.createElement('a');
+    close.classList.add('close', 'hover-scale');
+    close.textContent = 'close';
+    newLightbox.appendChild(close);
     const $main = document.querySelector("main");
     $main.append(newLightbox);
 
@@ -27,15 +39,15 @@ export const displayLightbox = () => {
 
 export const showSlides = (n) => {
     let i;
+    const lightbox = document.querySelector('.lightbox-content')
     const slides = document.getElementsByClassName("mySlides");
     let slideIndex = n;
     if (n > slides.length) {slideIndex = 1}
     if (n < 1) {slideIndex = slides.length}
     for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
       slides[i].setAttribute("aria-hidden", "true");
     }
-    slides[slideIndex-1].style.display = "block";
+    lightbox.style = `transform: translateX(-${100 * (slideIndex - 1)}%);`
     slides[slideIndex-1].setAttribute("aria-hidden", "false");
     const video = slides[slideIndex-1].querySelector('video')
     video?.play()
@@ -99,6 +111,54 @@ export const accessibilityEvents = (App) => {
             console.log('Touche Echap appuyée');
         }
     })
+
+    /**
+     * @description Swipe event for mobile
+     */
+    
+    // phone scroll event 
+    document.addEventListener('touchstart', handleTouchStart, false);
+    document.addEventListener('touchmove', handleTouchMove, false);
+    let xDown = null;
+    let yDown = null;
+    function getTouches(evt) {
+        return evt.touches || evt.originalEvent.touches;
+    }
+    function handleTouchStart(evt) {
+        const firstTouch = getTouches(evt)[0];
+        xDown = firstTouch.clientX;
+        yDown = firstTouch.clientY;
+    }
+
+    function handleTouchMove(evt) {
+        if (!xDown || !yDown) {
+            return;
+        }
+        let xUp = evt.touches[0].clientX;
+        let yUp = evt.touches[0].clientY;
+        let xDiff = xDown - xUp;
+        let yDiff = yDown - yUp;
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            if (xDiff > 0) {
+                let slideIndex = parseInt(App.page.displaiedMedia) + 1;
+                currentSlide(slideIndex)
+                if (slideIndex > App.page.medias.length) {slideIndex = 1}
+                history.pushState({}, '', `?id=${App.page.photographerId}&media=${slideIndex}&sortBy=${App.page.sortBy}`)
+                App.page.displaiedMedia = slideIndex
+                console.log('swipe left');
+            } else {
+                let slideIndex = parseInt(App.page.displaiedMedia) - 1;
+                currentSlide(slideIndex)
+                if (slideIndex < 1) {slideIndex = App.page.medias.length}
+                history.pushState({}, '', `?id=${App.page.photographerId}&media=${slideIndex}&sortBy=${App.page.sortBy}`)
+                App.page.displaiedMedia = slideIndex
+                console.log('swipe right');
+            }
+        }
+        xDown = null;
+        yDown = null;
+    }
+
     App.accessibilityEventsEnabled = true;
   }
 }
