@@ -29,9 +29,6 @@ class PhotographerPage extends Page {
     
     async getMedias() {
         this.medias = JSON.parse(window.localStorage.getItem(`media-${this.photographerId}`));
-        // const localMedias = JSON.parse(window.localStorage.getItem(`media-${this.photographerId}`));
-        // this.medias = localMedias
-        //     .map(media => new Media(media))
     }
 
     async displayExpo (medias, photographer) {
@@ -128,16 +125,43 @@ class PhotographerPage extends Page {
             lightbox.style.display = 'block'
             lightbox.setAttribute("aria-hidden", "false");
         }
+
+
         
         const $mediaCards = document.querySelectorAll('.expo_wrapper article')
         
         let i = 0
-        const $mySlides = document.querySelectorAll('.mySlides')
+        
+        const prevButton = lightbox.querySelector('.prev')
+        const nextButton = lightbox.querySelector('.next')
+        const closeBtn = lightbox.querySelector('.close')
+
+        closeBtn.addEventListener('click', (() => {
+                history.pushState({}, '', `?id=${this.photographerId}&sortBy=${this.sortBy}`)
+                this.displaiedMedia = null
+                closeLightbox()
+        }))
+
+        prevButton.addEventListener('click', (() => {
+                let slideIndex = parseInt(this.displaiedMedia) - 1;
+                currentSlide(slideIndex)
+                if (slideIndex < 1) {slideIndex = $mediaCards.length}
+                history.pushState({}, '', `?id=${this.photographerId}&media=${slideIndex}&sortBy=${this.sortBy}`)
+                this.displaiedMedia = slideIndex
+        }))
+        
+        nextButton.addEventListener('click', (() => {
+                let slideIndex = parseInt(this.displaiedMedia) + 1;
+                console.log(slideIndex);
+                
+                currentSlide(slideIndex)
+                if (slideIndex > $mediaCards.length) {slideIndex = 1}
+                history.pushState({}, '', `?id=${this.photographerId}&media=${slideIndex}&sortBy=${this.sortBy}`)
+                this.displaiedMedia = slideIndex
+        }))
+        
         for (const $mediaCard of $mediaCards) {
             ++i
-            const prevButton = $mySlides[i-1].querySelector('.prev')
-            const nextButton = $mySlides[i-1].querySelector('.next')
-            const closeBtn = $mySlides[i-1].querySelector('.close')
             const likeNumber = $mediaCard.querySelector('.like')
             const likeTotal = document.querySelector('.likeTotal')
             const likeIcon = $mediaCard.querySelector('.expo_wrapper_card_info_like_icon')
@@ -163,38 +187,8 @@ class PhotographerPage extends Page {
                         this.medias[index-1].isLiked = 0
                         window.localStorage.setItem(`media-${this.photographerId}`, JSON.stringify(this.medias));
                     }
-                    
                 }
             })(i))
-
-            closeBtn.addEventListener('click', (() => {
-                return () => {
-                    history.pushState({}, '', `?id=${this.photographerId}&sortBy=${this.sortBy}`)
-                    this.displaiedMedia = null
-                    closeLightbox()
-                }
-            })(i))
-
-            prevButton.addEventListener('click', ((index) => {
-                return () => {
-                    let slideIndex = parseInt(index) - 1;
-                    currentSlide(slideIndex)
-                    if (slideIndex < 1) {slideIndex = $mediaCards.length}
-                    history.pushState({}, '', `?id=${this.photographerId}&media=${slideIndex}&sortBy=${this.sortBy}`)
-                    this.displaiedMedia = slideIndex
-                }
-            })(i))
-            
-            nextButton.addEventListener('click', ((index) => {
-                return () => {
-                    let slideIndex = parseInt(index) + 1;
-                    currentSlide(slideIndex)
-                    if (slideIndex > $mediaCards.length) {slideIndex = 1}
-                    history.pushState({}, '', `?id=${this.photographerId}&media=${slideIndex}&sortBy=${this.sortBy}`)
-                    this.displaiedMedia = slideIndex
-                }
-            })(i))
-
             const $mediaButton = $mediaCard.querySelector('button')
             $mediaButton.addEventListener('click', ((index) => {
                 return () => {

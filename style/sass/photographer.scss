@@ -287,16 +287,6 @@ form textarea {
                 position: absolute;
                 top: 58px;
                 left: 5px;
-                // background-color: #901C1C;
-                // padding: 10px;
-                // padding-inline: 19px;
-                // width: 120px;
-                // position: absolute;
-                // top: 50px;
-                // font-size: 20px;
-                // font-weight: bold;
-                // color: white;
-                // border-radius: 5px;
                 &-first {
                     display: flex;
                     flex-direction: row;
@@ -446,14 +436,56 @@ form textarea {
     right: 0;
     top: 0;
     bottom: 0;
+    .hover-scale {
+        padding: 20px;
+        transform: scale(0.9);
+        transition: transform 0.3s;
 
+        &:hover {
+            transform: scale(1);
+        }
+    }
+    .prev {
+        position: absolute;
+        top: 50%;
+        left: 25px;
+        cursor: pointer;
+        color: transparent;
+        &::before {
+            content: url(../../assets/icons/left-icon.svg);
+        }
     
+    }
+    .next {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        cursor: pointer;
+        color: transparent;
+        &::before {
+            content: url(../../assets/icons/right-icon.svg);
+        }
+    }
+    .close {
+        position: absolute;
+        top: 25px;
+        right: 0;
+        cursor: pointer;
+        color: transparent;
+        &::before {
+            content: url(../../assets/icons/close2.svg);
+        }
+    }
     .lightbox-content {
         height: 100%;
         margin: 0;
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        flex-wrap: nowrap;
         .mySlides {
             width: 100%;
             height: 100%;
+            flex: 0 0 100%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -490,37 +522,6 @@ form textarea {
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
-            }
-            .prev {
-                position: absolute;
-                top: 50%;
-                left: 25px;
-                cursor: pointer;
-                color: transparent;
-                &::before {
-                    content: url(../../assets/icons/left-icon.svg);
-                }
-            
-            }
-            .next {
-                position: absolute;
-                top: 50%;
-                right: 0;
-                cursor: pointer;
-                color: transparent;
-                &::before {
-                    content: url(../../assets/icons/right-icon.svg);
-                }
-            }
-            .close {
-                position: absolute;
-                top: 25px;
-                right: 0;
-                cursor: pointer;
-                color: transparent;
-                &::before {
-                    content: url(../../assets/icons/close2.svg);
-                }
             }
         }
     }

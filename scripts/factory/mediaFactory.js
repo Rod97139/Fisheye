@@ -1,6 +1,3 @@
-// import { expoImageTemplate } from "../templates/expo";
-// import { sortBy } from "../utils/sorter";
-
 class MediaFactory {
         constructor(data, photographer) {
 
@@ -71,18 +68,7 @@ class MediaFactory {
                                 img.setAttribute("alt", title)
                                 img.setAttribute("role", "img")
                                 mySlides.appendChild(img);
-                                const prev = document.createElement('a');
-                                prev.classList.add('prev');
-                                prev.textContent = 'prev';
-                                mySlides.appendChild(prev);
-                                const next = document.createElement('a');
-                                next.classList.add('next');
-                                next.textContent = 'next';
-                                mySlides.appendChild(next);
-                                const close = document.createElement('a');
-                                close.classList.add('close');
-                                close.textContent = 'close';
-                                mySlides.appendChild(close);
+                                
 
                                 return (mySlides);
                         }
@@ -152,18 +138,7 @@ class MediaFactory {
                                 video.setAttribute("controls", true)
                                 video.setAttribute("role", "video")
                                 mySlides.appendChild(video);
-                                const prev = document.createElement('a');
-                                prev.classList.add('prev');
-                                prev.textContent = 'prev';
-                                mySlides.appendChild(prev);
-                                const next = document.createElement('a');
-                                next.classList.add('next');
-                                next.textContent = 'next';
-                                mySlides.appendChild(next);
-                                const close = document.createElement('a');
-                                close.classList.add('close');
-                                close.textContent = 'close';
-                                mySlides.appendChild(close);
+                                
 
                                 return (mySlides);
                         }
